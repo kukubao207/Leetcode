@@ -18,7 +18,7 @@ minStack.top();      --> Returns 0.
 minStack.getMin();   --> Returns -2.
 
 
-我的思路
+鎴戠殑鎬濊矾
 
 class MinStack {
 public:

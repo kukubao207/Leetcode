@@ -10,24 +10,36 @@ Return a deep copy of the list.
 第一趟循环整个链表是构建这个HashMap
 第二趟循环整个链表是为新节点的random指针和next指针赋值。
 
-public RandomListNode copyRandomList(RandomListNode head)
-{
-    if (head == null)
-        return null;
-
-    Map<RandomListNode, RandomListNode> map = new HashMap<>();
-    for (RandomListNode ptr = head; ptr != null; ptr = ptr.next)
-    {
-        map.put(ptr, new RandomListNode(ptr.label));
-    }
-
-    for (RandomListNode ptr = head; ptr != null; ptr = ptr.next)
-    {
-        map.get(ptr).next = map.get(ptr.next);
-        map.get(ptr).random = map.get(ptr.random);
-    }
-    return map.get(head);
-}
+/**
+ * Definition for singly-linked list with a random pointer.
+ * struct RandomListNode {
+ *     int label;
+ *     RandomListNode *next, *random;
+ *     RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
+ * };
+ */
+class Solution {
+public RandomListNode copyRandomList(RandomListNode head) {
+	if (head == null) return null;
+	  
+	Map<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
+	  
+	// loop 1. copy all the nodes
+	RandomListNode node = head;
+	while (node != null) {
+		map.put(node, new RandomListNode(node.label));
+		node = node.next;
+	}
+	// loop 2. assign next and random pointers
+	node = head;
+	while (node != null) {
+		map.get(node).next = map.get(node.next);
+		map.get(node).random = map.get(node.random);
+		node = node.next;
+	}  
+	return map.get(head);
+	}
+};
 
 另一种思路
 An intuitive solution is to keep a hash table for each node in the list, via which we just need to iterate the list in 2 rounds respectively to create nodes and assign the values for their random pointers. As a result, the space complexity of this solution is O(N), although with a linear time complexity.
