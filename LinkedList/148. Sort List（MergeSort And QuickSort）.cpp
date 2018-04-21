@@ -113,7 +113,8 @@ Of course, this solution passes the online judge luckily. If the linked list is 
 class Solution {
 public:
     void sortListHelper(ListNode* head, ListNode* tail) {
-    	if (head -> next == tail) return;
+    	if (head -> next == tail)
+            return;
     	/* Partition the list. */
     	ListNode* pre = head;
     	ListNode* cur = head -> next;
