@@ -15,11 +15,12 @@
 
 2018-05-07 完成Tree部分31道题 √
 
-2018-05-14 完成Binary Search Tree部分13道题+Graph部分16道题 ×   这周完成了8道BST+7道图论
+2018-05-14 完成Binary Search Tree部分8道题 √ + Graph部分7道题 √
 
-2018-05-21 完成Graph部分3道题 + Queue部分5道题 + Union Find部分14道题
+2018-05-21 完成Graph部分3道题 √ + Union Find部分7道题 √
 
-2018-05-28 
+2018-05-28 完成数组部分20道题 
+
 
 
 
