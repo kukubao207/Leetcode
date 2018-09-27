@@ -28,6 +28,6 @@
 
 开学了,最近果麦项目上线之后空闲时间多了一些,利用这段时间来做一些题.
 
-2018-09-27 Array easy 1 + Array medium 1 + DP medium 1
+2018-09-27 Array easy 1 + Array medium 1 + DP easy 1 + DP medium 1
 
 
