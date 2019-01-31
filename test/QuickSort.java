@@ -1,9 +1,4 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-public class StringMatch {
+public class QuickSort {
     public static void main(String args[]) {
         int[] A = {3, 2, 1, 5, 6, 3};
         int k = 2;
@@ -74,9 +69,6 @@ public class StringMatch {
     //迭代写法
     public static void quickSort2(int[] nums, int start, int end){
         int lo=start,hi=end;
-        while(lo<hi){
-            int index = partition(nums,lo,hi);
 
-        }
     }
 }
