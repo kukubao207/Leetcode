@@ -7,6 +7,7 @@ public class StringMatch {
     public static void main(String args[]) {
         int[] A = {3, 2, 1, 5, 6, 3};
         int k = 2;
+        String a=".....";
         quickSort(A,0,A.length-1);
         //int ans = findKthLargest(A, k);
         //int ans2 = partition2(A,0,5);
