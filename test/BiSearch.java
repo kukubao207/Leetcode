@@ -30,7 +30,6 @@ public class BiSearch {
     }
 
     public static int find_first_lower_and_equal_than_target_index(int[] arr,int l,int r,int target){
-        int index = -1;
         while(l<r-1){
             int mid = l + (r-l)/2;
             if(arr[mid]<=target)
@@ -39,14 +38,14 @@ public class BiSearch {
                 r=mid;
         }
         if(arr[r]<=target)
-            index=r;
+            return r;
         else if(arr[l]<=target)
-            index=l;
-        return index;
+            return l;
+        else
+            return -1;
     }
 
     public static int find_first_lower_than_target_index(int[] arr,int l,int r,int target){
-        int index = -1;
         while(l<r-1){
             int mid = l + (r-l)/2;
             if(arr[mid]<target)
@@ -55,14 +54,14 @@ public class BiSearch {
                 r=mid;
         }
         if(arr[r]<target)
-            index=r;
+            return r;
         else if(arr[l]<target)
-            index=l;
-        return index;
+            return l;
+        else
+            return -1;
     }
 
     public static int find_first_higher_and_equal_than_target_index(int[] arr,int l,int r,int target){
-        int index = -1;
         while(l<r-1){
             int mid = l + (r-l)/2;
             if(arr[mid]>=target)
@@ -71,14 +70,14 @@ public class BiSearch {
                 l=mid;
         }
         if(arr[l]>=target)
-            index=l;
+            return l;
         else if(arr[r]>=target)
-            index=r;
-        return index;
+            return r;
+        else
+            return arr.length;
     }
 
     public static int find_first_higher_than_target_index(int[] arr,int l,int r,int target){
-        int index = -1;
         while(l<r-1){
             int mid = l + (r-l)/2;
             if(arr[mid]>target)
@@ -87,9 +86,10 @@ public class BiSearch {
                 l=mid;
         }
         if(arr[l]>target)
-            index=l;
+            return l;
         else if(arr[r]>target)
-            index=r;
-        return index;
+            return r;
+        else
+            return arr.length;
     }
 }

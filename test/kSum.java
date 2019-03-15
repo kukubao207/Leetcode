@@ -4,6 +4,9 @@ import java.util.List;
 
 public class kSum {
     public static void main(String[] args){
+        int a = -4&-3;
+        System.out.println(a);
+        System.out.println(-4&-5);
         int[] nums = {0,0,0,0};
         Arrays.sort(nums);
         List<List<Integer>> res = kSum(nums,0,4,0);
