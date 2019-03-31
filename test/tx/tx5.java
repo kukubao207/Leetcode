@@ -1,53 +1,43 @@
 package tx;
 
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.Scanner;
 
+// 用一个矩阵保存每对点的距离，每次找到最近的一对点，
+// 它们最后的半径就是距离(一方已固定)或者它的一半，
+// 之后更新矩阵，计算一对点距离时，如果一对点都已固定，不用考虑，当做正无穷；
+// 如果只有一点固定，距离是（实际距离-固定点的圆半径-经过的时间），都不固定，距离是（实际距离-经过的时间）/2。
 public class tx5 {
+    class point{
+        double x,y;
+        point(int x,int y){
+            this.x=x;
+            this.y=y;
+        }
+    }
+    public static double compute(point a,point b){
+        return Math.sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
+    }
     public static void main(String[] args){
-        int[] inp = {1,3,3,3,3,4,5};
-        new tx5().GetNumberOfK(inp,0);
-    }
-    public int GetNumberOfK(int [] array , int k) {
-        if(array.length==0)
-            return 0;
-        int idx1 = firstLessThanK(array, k);
-        int idx2 = firstMoreThanK(array, k);
-        return idx2-idx1-1;
-    }
-    public int firstLessThanK(int[] array, int k){
-        int l=0,r=array.length-1;
-        while(l<r-1){
-            int m=l+(r-l)/2;
-            if(array[m]>=k){
-                r=m;
-            }else if(array[m]<k){
-                l=m;
+        Scanner sc = new Scanner(System.in);
+        int n =sc.nextInt();
+        point[] parr = new point[n];
+        for(int i=0;i<n;i++){
+            parr[i].x=sc.nextDouble();
+            parr[i].y=sc.nextDouble();
+        }
+        double[][] dist = new double[n][n];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                dist[i][j]=compute(parr[i],parr[j]);
             }
         }
-        if(array[r]<k)
-            return r;
-        else if(array[l]<k)
-            return l;
-        else
-            return -1;
-    }
-    public int firstMoreThanK(int[] array, int k){
-        int l=0,r=array.length-1;
-        while(l<r-1){
-            int m=l+(r-l)/2;
-            if(array[m]>k){
-                r=m;
-            }else if(array[m]<=k){
-                l=m;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(j!=i){
+
+                }
             }
         }
-        if(array[l]>k)
-            return l;
-        else if(array[r]>k)
-            return r;
-        else
-            return array.length;
     }
+
 }

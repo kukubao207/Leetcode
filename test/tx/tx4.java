@@ -2,54 +2,93 @@ package tx;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class tx4 {
-    public static void main(String[] args){
-        //List<String> res = Permutation("abc");
-        ArrayList<String> res2 = new ArrayList<String>();
-        boolean[] vis = new boolean[3];
-        dfs("aaa","",res2,vis);
-        System.out.println(res2);
-    }
-    public static ArrayList<String> Permutation(String str) {
-        if(str.equals(""))
-            return new ArrayList<String>();
-        ArrayList<String> res = new ArrayList<String>();
-        ArrayList<StringBuilder> temp = new ArrayList<>();
-        temp.add(new StringBuilder());
-        for(int i=0;i<str.length();i++){
-            String cur = str.substring(i,i+1);
-            ArrayList<StringBuilder> t = new ArrayList<>();
-            for(StringBuilder s:temp){
-                for(int j=0;j<=s.length();j++){
-                    StringBuilder sb = new StringBuilder(s);
-                    while(j<s.length()&&(""+s.charAt(j)).equals(cur))
-                        j++;
-                    t.add(sb.insert(j,cur));
-                }
-            }
-            System.out.println(t);
-            temp = t;
-        }
-        for(int i=0;i<temp.size();i++)
-            res.add(temp.get(i).toString());
-        return res;
-    }
+    private int[] found = new int[100005];
 
-    public static void dfs(String str,String temp,ArrayList<String> res,boolean[] vis){
-        if(temp.length()==str.length()){
-            String tttt = new String(temp);
-            res.add(tttt);
-            return;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] a = new int[6];
+        for (int i = 0; i < 6; i++)
+            a[i] = sc.nextInt();
+
+        //边长为6的
+        int ans = 0;
+        while (a[5] > 0) {
+            a[5]--;
+            ans++;
         }
-        for(int i=0;i<str.length();i++){
-            if(vis[i]==true)
-                continue;
-            if(i>=1&&str.charAt(i)==str.charAt(i-1)&&vis[i-1]==false)
-                continue;
-            vis[i]=true;
-            dfs(str,temp+str.charAt(i),res,vis);
-            vis[i]=false;
+
+        //边长为5的
+        while (a[4] > 0) {
+            a[4]--;
+            a[0] = Math.max(a[0] - 11, 0);
+            ans++;
         }
+        //边长为4的
+        while (a[3] > 0) {
+            a[3]--;
+            //边长为2的超过5个，肯定先放边长为2的
+            if (a[1] >= 5)
+                a[1] = Math.max(a[1] - 5, 0);
+                //边长为2的小于5个，放完边长2的肯定去放边长为1的
+            else {
+                a[0] = Math.max(a[0] - 4 * (5 - a[1]), 0);
+                a[1] = 0;
+            }
+            ans++;
+        }
+        //边长为3的
+        while (a[2] >= 4) {
+            a[2] = Math.max(a[2] - 4, 0);
+            ans++;
+        }
+        //边长为3的还有剩余
+        if (a[2] > 0) {
+            switch (a[2]) {
+                case 1:
+                    if (a[1] >= 5) {
+                        a[1] = Math.max(a[1] - 5, 0);
+                        a[0] = Math.max(a[0] - 7, 0);
+                    } else {
+                        a[0] = Math.max(a[0] - (7 + 4 * (5 - a[1])), 0);
+                        a[1] = 0;
+                    }
+                    break;
+                case 2:
+                    if (a[1] >= 3) {
+                        a[1] = Math.max(a[1] - 3, 0);
+                        a[0] = Math.max(a[0] - 6, 0);
+                    } else {
+                        a[0] = Math.max(a[0] - 6 + 4 * (3 - a[1]), 0);
+                        a[1] = 0;
+                    }
+                    break;
+                case 3:
+                    if (a[1] >= 1) {
+                        a[1] = Math.max(a[1] - 1, 0);
+                        a[0] = Math.max(a[0] - 5, 0);
+                    } else {
+                        a[0] = Math.max(a[0] - 9, 0);
+                    }
+                    break;
+            }
+            ans++;
+        }
+        while (a[1] >= 9) {
+            a[1] = Math.max(a[1] - 9, 0);
+            ans++;
+        }
+        if (a[1] > 0) {
+            a[0] = Math.max(a[0] - 4 * (9 - a[1]), 0);
+            a[1] = 0;
+            ans++;
+        }
+        while (a[0] > 0) {
+            a[0] = Math.max(a[0] - 36, 0);
+            ans++;
+        }
+        System.out.println(ans);
     }
 }

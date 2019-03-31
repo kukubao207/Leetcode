@@ -3,32 +3,42 @@ package tx;
 import java.util.*;
 
 public class tx2 {
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.next();
-        str=str.toLowerCase();
-        //System.out.println(remove(str).charAt(0));
-        System.out.println("res="+remove(str));
-        Stack<Integer> sta = new Stack<>();
-    }
-    public static String remove(String s) {
-        if(s.length()==0)
-            return "";
-        int[] letter = new int[26];
-        int index = 0;
-        for (int i = 0; i < s.length(); i++)
-            letter[s.charAt(i) - 'a']++;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) < s.charAt(index))
-                index = i;
-            letter[s.charAt(i)-'a']--;
-            if (letter[s.charAt(i) - 'a'] == 0)
-                break;
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next();
+        if(input.equals("None"))
+            System.out.println("True");
+        String[] inp = input.split(",");
+        int[] a = new int[inp.length+1];
+        for(int i=1;i<a.length;i++) {
+            if(inp[i-1].equals("None"))
+                a[i] = Integer.MIN_VALUE;
+            else
+                a[i] = Integer.valueOf(inp[i - 1]);
         }
-        String temp = s.substring(index + 1).replaceAll("" + s.charAt(index), "");
-        System.out.println("before remove: " + temp);
-        String remove_temp = remove(temp);
-        System.out.println("after remove: " + remove_temp);
-        return s.charAt(index) + remove_temp;
+        if(isBST(a))
+            System.out.println("True");
+        else
+            System.out.println("False");
+    }
+    public static boolean isBST(int[] a) {
+        for(int i=1;i<a.length;i++){
+            if(a[i]==Integer.MIN_VALUE)
+                continue;
+            if(2*i<a.length){
+                if(a[2*i]==Integer.MIN_VALUE)
+                    continue;
+                if(a[2*i]>=a[i])
+                    return false;
+            }
+            if(2*i+1<a.length){
+                if(a[2*i+1]==Integer.MIN_VALUE)
+                    continue;
+                if(a[2*i+1]<=a[i])
+                    return false;
+            }
+        }
+        return true;
     }
 }
