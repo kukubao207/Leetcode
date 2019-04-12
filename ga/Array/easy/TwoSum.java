@@ -13,7 +13,9 @@ public class TwoSum {
         System.out.println(Arrays.toString(twoSum_two(nums, target)));
         System.out.println(Arrays.toString(towSum_three(nums, target)));
     }
-    //一次遍历，在进行迭代并将元素插入到表中的同时，回过头来检查表中是否已经存在当前元素所对应的目标元素。如果它存在，那我们已经找到了对应解，并立即将其返回。
+    //一次遍历，在进行迭代并将元素插入到表中的同时，
+    // 回过头来检查表中是否已经存在当前元素所对应的目标元素。
+    // 如果它存在，那我们已经找到了对应解，并立即将其返回。
     //时间复杂度O(n),空间复杂度O(n)
     public static int[] twoSum_one(int[] nums, int target) {
         Map<Integer,Integer> map = new HashMap<Integer,Integer>();
@@ -26,7 +28,9 @@ public class TwoSum {
         }
         throw new IllegalArgumentException("No result");
     }
-    //两次遍历,在第一次迭代中，我们将每个元素的值和它的索引添加到表中。然后，在第二次迭代中，我们将检查每个元素所对应的目标元素(another)是否存在于表中。注意，该目标元素不能是 nums[i]nums[i] 本身！
+    //两次遍历,在第一次迭代中，我们将每个元素的值和它的索引添加到表中。
+    // 然后，在第二次迭代中，我们将检查每个元素所对应的目标元素(another)是否存在于表中。
+    // 注意，该目标元素不能是 nums[i]nums[i] 本身！
     //时间复杂度O(n)，空间复杂度O(n)
     public static int[] twoSum_two(int[] nums, int target) {
         Map<Integer,Integer> map = new HashMap<Integer,Integer>();
