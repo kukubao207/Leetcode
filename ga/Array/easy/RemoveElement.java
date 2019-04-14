@@ -12,9 +12,9 @@ import java.util.Arrays;
 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。*/
 public class RemoveElement {
     public static void main(String[] args){
-        int[] nums = {0,1,2,2,3,0,4,2};
-        int val = 2;
-        System.out.println(removeElement_one(nums, val));
+        int[] nums = {2};
+        int val = 3;
+        System.out.println(removeElement_two(nums, val));
     }
     //i存放需要被替换位置，j存放需要替换的索引
     //时间复杂度O(2n)，空间复杂度O(1)
@@ -34,7 +34,7 @@ public class RemoveElement {
     //时间复杂度O(2n)，空间复杂度O(1)
     public static int removeElement_two(int[] nums, int val) {
         int i = 0;
-        int j = 1;
+        int j = 0;
         int flag = 0;
         int temp = 0;
         while(i < nums.length && j < nums.length){
