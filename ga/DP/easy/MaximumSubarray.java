@@ -32,35 +32,20 @@ public class MaximumSubarray {
         return res;
     }
 
-    public static int max(int a, int b){
-        if(a >= b){
-            return a;
-        }else{
-            return b;
-        }
-    }
     //定义一个函数f(n)，以第n个数为结束点的子数列的最大和，存在一个递推关系f(n) = max(f(n-1) + nums[n], nums[n]);
-    public static int f_n(int n, int[] nums){
-        if(n == 0){
-            return nums[0];
-        }else{
-            return max(f_n(n-1, nums) + nums[n], nums[n]);
-        }
-    }
     //动态规划法
     //时间复杂度O(n),空间复杂度O(n)
     public static int maxSubArray_two(int[] nums) {
         if(nums.length == 0)
             return -1;
-        int res = nums[0];
+        //用sum来记录当前位置之前能得到的最大连续和
+        int res = nums[0],sum = 0;
         for(int i = 0; i< nums.length; i++){
-           int sum = f_n(i,nums);
-           if(sum > res)
-               res = sum;
+           sum = Math.max(nums[i],sum+nums[i]);
+           res = Math.max(res,sum);
         }
         return res;
     }
-
 
 
     //分治算法
