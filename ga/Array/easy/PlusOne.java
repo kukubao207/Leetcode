@@ -20,28 +20,29 @@ import java.util.Arrays;
 //        输出: [4,3,2,2]
 //        解释: 输入数组表示数字 4321。
 public class PlusOne {
-    public static void main(String args[]){
-        int[] digits = new int[]{9,9,9};
+    public static void main(String args[]) {
+        int[] digits = new int[]{9, 9, 9};
         System.out.println(Arrays.toString(plusOne(digits)));
 
     }
+
     //时间复杂度O(n)
     //空间复杂度O(n)
     public static int[] plusOne(int[] digits) {
         int i = digits.length - 1;
         digits[i] = digits[i] + 1;
-        while(i >= 0 && digits[i] == 10){
+        while (i >= 0 && digits[i] == 10) {
             digits[i] = 0;
             i--;
-            if(i != -1){
-            digits[i] = digits[i] + 1;
+            if (i != -1) {
+                digits[i] = digits[i] + 1;
             }
         }
-        if(i == -1){
+        if (i == -1) {
             int[] res = new int[digits.length + 1];
             res[0] = 1;
             return res;
         }
-    return digits;
+        return digits;
     }
 }

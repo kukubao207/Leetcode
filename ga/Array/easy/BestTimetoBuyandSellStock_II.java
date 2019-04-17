@@ -25,5 +25,46 @@ package Array.easy;
 //输出: 0
 //解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
 public class BestTimetoBuyandSellStock_II {
-
+    public static void main(String[] args){
+        int prices[] = {7,1,5,3,6,4};
+        System.out.println(maxProfit_one(prices));
+    }
+    //贪心算法，只要今天比昨天大，就卖出
+    //时间复杂度O(n)，空间复杂度O(1)
+    public static int maxProfit(int[] prices) {
+        int i = 0;
+        int j = 1;
+        int max = 0;
+        while(i < prices.length && j < prices.length){
+            if(prices[i] < prices[j]){
+                max = max + (prices[j] - prices[i]);
+            }
+            i++;
+            j++;
+        }
+        return max;
+    }
+    //暴力
+    //时间复杂度O(n*n)，空间复杂度O(n)
+    public static int maxProfit_one(int[] prices) {
+        return calculate(prices, 0);
+    }
+    public static int calculate(int[] prices, int s){
+        if(s >= prices.length)
+            return 0;
+        int max = 0;
+        for(int i = s; i < prices.length; i++){
+            int maxProfit = 0;
+            for(int j = i + 1; j < prices.length; j++){
+                if(prices[j] - prices[i] > 0){
+                    int profit = calculate(prices, j + 1) + prices[j] - prices[i];
+                    if(maxProfit < profit)
+                        maxProfit = profit;
+                }
+            }
+            if(max < maxProfit)
+                max = maxProfit;
+        }
+        return max;
+    }
 }

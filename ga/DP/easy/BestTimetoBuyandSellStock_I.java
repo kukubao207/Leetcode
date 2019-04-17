@@ -1,4 +1,7 @@
 package DP.easy;
+
+import java.util.Arrays;
+
 //121. Best Time to Buy and Sell Stock
 //给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
 //
@@ -18,5 +21,36 @@ package DP.easy;
 //        输出: 0
 //        解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
 public class BestTimetoBuyandSellStock_I {
-
+    public static void main(String[] args){
+        int prices[] = {7,6,4,3,1};
+        System.out.println(maxProfit_two(prices));
+    }
+    //暴力
+    //时间复杂度O(n*n),空间复杂度O(1)
+    public static int maxProfit_one(int[] prices) {
+        int max = 0;
+        for(int i = 0; i < prices.length - 1; i++){
+            for(int j = i; j < prices.length; j++){
+                if(prices[j] - prices[i] > max){
+                    max = prices[j] - prices[i];
+                }
+            }
+        }
+        return max;
+    }
+    //动态规划
+    //前i天的最大收益 = max{前i-1天的最大收益，第i天的价格-前i-1天中的最小价格}
+    //时间复杂度O(n),空间复杂度O(1)
+    public static int maxProfit_two(int[] prices) {
+        if (prices.length == 0)
+            return 0;
+        int min = prices[0];//记录连续几天中的最小价格
+        int max_i = 0;//前i天的最大收益
+        for(int i = 1; i < prices.length; i++){
+            max_i = Math.max(max_i, prices[i] - min);
+            if(prices[i] < min)
+                min = prices[i];
+        }
+        return max_i;
+    }
 }

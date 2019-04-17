@@ -26,7 +26,7 @@ public class MergeSortedArray {
 
     }
     //类似于插入排序，对于nums2数据，在已排序序列nums1中从后向前扫描，找到相应的位置并插入
-    //时间复杂度O(n),空间复杂度O(1)
+    //时间复杂度O(n*n),空间复杂度O(1)
     public static int[] merge_one(int[] nums1, int m, int[] nums2, int n) {
         int length = m + n;
         int temp = 0;

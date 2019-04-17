@@ -17,7 +17,7 @@ import java.util.List;
 public class PascalTriangle_II {
     public static void main(String args[]){
         int rowIndex = 3;
-        System.out.println(getRow(rowIndex));
+        System.out.println(getRow_one(rowIndex));
     }
 
     public static List<Integer> getRow(int rowIndex) {
@@ -33,5 +33,22 @@ public class PascalTriangle_II {
             res.add(in);
         }
         return res.get(rowIndex);
+    }
+
+    public static List<Integer> getRow_one(int rowIndex) {
+        ArrayList<Integer> res = new ArrayList<>();
+        ArrayList<Integer> pre = new ArrayList<>();
+        for(int i = 0; i<= rowIndex; i++){
+            res.clear();
+            for(int j = 0 ;j <= i; j++){
+                if(j == 0 || j == i)
+                    res.add(1);
+                else{
+                    res.add(pre.get(j) + pre.get(j - 1));
+                }
+            }
+            pre=(ArrayList<Integer>) res.clone();
+        }
+        return res;
     }
 }
