@@ -1,4 +1,9 @@
 package DP.hard;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 //123. Best Time to Buy and Sell Stock III
 //给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。
 //
@@ -25,5 +30,57 @@ package DP.hard;
 //        输出: 0
 //        解释: 在这个情况下, 没有交易完成, 所以最大利润为 0。
 public class BestTimetoBuyandSellStock_III {
+    public static void main(String[] args) {
+        int prices[] = {1,4,2};
+        System.out.println(maxProfit(prices));
+    }
+
+    //只要今天比昨天的利润大，就将这两天连接，相当于选择所有线段中最长的两条线
+    //时间复杂度O(n*n*n*n)
+    //空间复杂度O(n)
+    public static int maxProfit(int[] prices) {
+        if (prices.length <= 1)
+            return 0;
+        int res[] = new int[prices.length - 1];//存放线段的长度，即利润大小
+        int k = 0;//第几条线段(正的)
+        int t = 0;//（负的）
+        for (int i = 0; i < prices.length - 1; i++) {
+            if (prices[i + 1] >= prices[i]) {
+                if (i >= 1 && prices[i] < prices[i - 1])
+                    k = t + 1;
+                res[k] = res[k] + (prices[i + 1] - prices[i]);
+            } else {
+                if (i >= 1 && prices[i] >= prices[i - 1])
+                    t = k + 1;
+                res[t] = res[t] + (prices[i + 1] - prices[i]);
+            }
+        }
+//        System.out.println(Arrays.toString(res));
+        if (res.length == 1){
+            if(res[0] < 0)
+                return 0;
+            return res[0];
+        }
+        else {
+            int max = 0;
+            for (int i = 0; i < res.length; i++) {
+                int temp1 = 0;
+                for (int j = i; j < res.length; j++) {
+                    temp1 = temp1 + res[j];
+                    if(max < temp1)
+                        max = temp1;
+                    for (int q = j + 1; q < res.length; q++) {
+                        int temp2 = 0;
+                        for (int p = q; p < res.length; p++) {
+                            temp2 = temp2 + res[p];
+                            if (max < temp1 + temp2)
+                                max = temp1 + temp2;
+                        }
+                    }
+                }
+            }
+            return max;
+        }
+    }
 
 }

@@ -1,4 +1,9 @@
 package TwoPointer.easy;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 //167. Two Sum II - Input array is sorted
 //给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。
 //
@@ -14,5 +19,23 @@ package TwoPointer.easy;
 //        输出: [1,2]
 //        解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。
 public class TwoSum_II {
-    
+    public static void main(String[] args){
+        int numbers[] = {2, 7, 11, 15};
+        int target = 9;
+        System.out.println(Arrays.toString(twoSum(numbers, target)));
+    }
+    //存入hash
+    //时间复杂度O(n)
+    //空间复杂度O(n)
+    public static int[] twoSum(int[] numbers, int target) {
+        Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+        for(int i = 0; i < numbers.length; i++){
+            int another = target - numbers[i];
+            if (map.containsKey(another)){
+                return new int[]{map.get(another) + 1, i + 1};
+            }
+            map.put(numbers[i],i);
+        }
+        throw new IllegalArgumentException("No result");
+    }
 }
