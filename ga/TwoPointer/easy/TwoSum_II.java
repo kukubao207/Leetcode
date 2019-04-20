@@ -22,7 +22,7 @@ public class TwoSum_II {
     public static void main(String[] args){
         int numbers[] = {2, 7, 11, 15};
         int target = 9;
-        System.out.println(Arrays.toString(twoSum(numbers, target)));
+        System.out.println(Arrays.toString(twoSum_one(numbers, target)));
     }
     //存入hash
     //时间复杂度O(n)
@@ -37,5 +37,21 @@ public class TwoSum_II {
             map.put(numbers[i],i);
         }
         throw new IllegalArgumentException("No result");
+    }
+    //排序数组
+    //时间复杂度O(n)
+    //空间复杂度O(1)
+    public static int[] twoSum_one(int[] numbers, int target) {
+        int i = 0;//i存放最小值的索引
+        int j = numbers.length - 1; //j存放最大值的索引
+        while(i < j){
+            if(numbers[i] + numbers[j] < target)
+                i++;
+            else if(numbers[i] + numbers[j] > target)
+                j--;
+            else
+                break;
+        }
+        return new int[]{i + 1, j + 1};
     }
 }
