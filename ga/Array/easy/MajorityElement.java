@@ -13,9 +13,58 @@ package Array.easy;
 //输入: [2,2,1,1,1,2,2]
 //输出: 2
 
+import java.util.Arrays;
+import java.util.HashMap;
+
 public class MajorityElement {
     //《剑指Offer》面试题39
     //这道题我面腾讯面试时候问了我，好好看看，《剑指offer》中两种时间O（n），空间O（1）的解法要掌握
     //讲摩尔投票讲的比较好的一篇
     //https://www.zhihu.com/question/49973163
+    public static void main(String[] args){
+        int nums[] = {2,2,1,1,1,2,2};
+        System.out.println(majorityElement_one(nums));
+    }
+
+    //摩尔投票算法
+    //摩尔投票算法是基于这个事实：每次从序列里选择两个不相同的数字删除掉（或称为“抵消”），最后剩下一个数字或几个相同的数字，就是出现次数大于总数一半的那个
+    //时间复杂度O(n),空间复杂度O(1)
+    public static int majorityElement(int[] nums) {
+        int major = nums[0];
+        int count = 1;
+        for(int i = 1; i < nums.length; i++){
+            if(major == nums[i])
+                count++;
+            else{
+                count--;
+                if(count == 0)
+                    major = nums[i + 1];
+            }
+        }
+        return major;
+    }
+
+    //条件>n/2，所以排序后，中间元素一定是众数
+    //时间复杂度 O（nlg(n)）,空间复杂度O(1)
+    public static int majorityElement_one(int[] nums) {
+        Arrays.sort(nums);
+//        System.out.println(Arrays.toString(nums));
+        return nums[nums.length / 2];
+    }
+
+    //全部遍历
+    //时间复杂度O(n),空间复杂度O(n)
+    public static int majorityElement_two(int[] nums) {
+        HashMap<Integer,Integer> map = new HashMap();
+        for(int i = 0; i < nums.length; i++){
+            if(map.containsKey(nums[i]))
+                map.put(nums[i],map.get(nums[i]) + 1);
+            else
+                map.put(nums[i], 1);
+        }
+        for(Integer key : map.keySet())
+            if(map.get(key) > nums.length / 2)
+                return key;
+        return -1;
+    }
 }
