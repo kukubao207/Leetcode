@@ -67,4 +67,40 @@ public class MajorityElement {
                 return key;
         return -1;
     }
+
+    //找出大于1/3次的
+    public static void vote(int[] a) {
+        int major1 = 0, major2 = 1;
+        int count1 = 0, count2 = 0;
+        for (int cur : a) {
+            if (cur == major1) {
+                count1++;
+            } else if (cur == major2) {
+                count2++;
+            } else {
+                if (count1 == 0) {
+                    major1 = cur;
+                    count1 = 1;
+                } else if (count2 == 0) {
+                    major2 = cur;
+                    count2 = 1;
+                } else {
+                    count1--;
+                    count2--;
+                }
+            }
+        }
+        count1 = 0;
+        count2 = 0;
+        for (int cur : a) {
+            if (cur == major1)
+                count1++;
+            if (cur == major2)
+                count2++;
+        }
+        if (count1 > a.length / 3)
+            System.out.println(major1);
+        if (count2 > a.length / 3)
+            System.out.println(major2);
+    }
 }
