@@ -67,6 +67,7 @@ public class MajorityElement {
                 return key;
         return -1;
     }
+
     //利用快速排序，当数组有序的时候，众数一定是索引位置为n/2的地方
     //题目转换为第n/2小的问题
     //当基准所在的位置为n/2，基准即为众数，当基准的位置大于n/2，众数在基准的左边，反之，在右边
@@ -99,6 +100,43 @@ public class MajorityElement {
     //快速排序时间复杂度O(n),空间复杂度O(1)
     public static int majorityElement_three(int[] nums) {
         return findMajority(nums, 0 ,nums.length - 1);
+    }
+
+
+    //找出大于1/3次的,有可能不存在
+    public static void vote(int[] a) {
+        int major1 = 0, major2 = 1;
+        int count1 = 0, count2 = 0;
+        for (int cur : a) {
+            if (cur == major1) {
+                count1++;
+            } else if (cur == major2) {
+                count2++;
+            } else {
+                if (count1 == 0) {
+                    major1 = cur;
+                    count1 = 1;
+                } else if (count2 == 0) {
+                    major2 = cur;
+                    count2 = 1;
+                } else {
+                    count1--;
+                    count2--;
+                }
+            }
+        }
+        count1 = 0;
+        count2 = 0;
+        for (int cur : a) {
+            if (cur == major1)
+                count1++;
+            if (cur == major2)
+                count2++;
+        }
+        if (count1 > a.length / 3)
+            System.out.println(major1);
+        if (count2 > a.length / 3)
+            System.out.println(major2);
     }
 
 }
