@@ -22,8 +22,8 @@ public class MajorityElement {
     //讲摩尔投票讲的比较好的一篇
     //https://www.zhihu.com/question/49973163
     public static void main(String[] args){
-        int nums[] = {2,2,1,1,1,2,2};
-        System.out.println(majorityElement_one(nums));
+        int nums[] = {2,2,3,3,1,3,3};
+        System.out.println(majorityElement_three(nums));
     }
 
     //摩尔投票算法
@@ -67,4 +67,38 @@ public class MajorityElement {
                 return key;
         return -1;
     }
+    //利用快速排序，当数组有序的时候，众数一定是索引位置为n/2的地方
+    //题目转换为第n/2小的问题
+    //当基准所在的位置为n/2，基准即为众数，当基准的位置大于n/2，众数在基准的左边，反之，在右边
+    public static int partition(int[] nums, int left, int right){
+        int p = nums[left];
+        int i = left;
+        int j = right;
+        while(i < j){
+            while(i < j && nums[j] >= p)
+                j--;
+            nums[i] = nums[j];
+            while(i < j && nums[i] <= p)
+                i++;
+            nums[j] = nums[i];
+        }
+        nums[i] = p;
+        return i;
+    }
+    public static int findMajority(int[] nums, int left, int right) {
+        int i = partition(nums, left, right);
+        if(i == nums.length / 2)
+            return nums[i];
+        else if(i < nums.length / 2)
+            return findMajority(nums, i + 1, right);
+        else{
+            return findMajority(nums, left, i - 1);
+        }
+    }
+
+    //快速排序时间复杂度O(n),空间复杂度O(1)
+    public static int majorityElement_three(int[] nums) {
+        return findMajority(nums, 0 ,nums.length - 1);
+    }
+
 }
