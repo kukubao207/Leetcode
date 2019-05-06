@@ -10,9 +10,9 @@ import java.util.Arrays;
 //与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).
 public class ThreeSumCloest {
     public static void main(String args[]){
-        int[] nums = new int[]{-1,2,1,-4};
+        int[] nums = new int[]{0,0,0};
         int target = 1;
-        System.out.println(threeSumClosest(nums, target));
+        System.out.println(threeSumClosest_one(nums, target));
 
     }
     //先排序, 然后遍历, 将三数之和改变为二数之和，然后内部使用双指针
@@ -47,5 +47,36 @@ public class ThreeSumCloest {
             }
         }
         return res;
+    }
+
+    public static int threeSumClosest_one(int[] nums, int target) {
+        Arrays.sort(nums);
+        int len = nums.length;
+        int min = Integer.MAX_VALUE;
+        int closeNum = 0;
+        for(int i = 0; i < nums.length - 2; i++){
+            if(i > 0 && nums[i] == nums[i - 1]) continue;//一次去重
+            int l = i + 1;
+            int r = len - 1;
+            while(l < r){
+                int threeSum = nums[i] + nums[l] + nums[r];
+                if(Math.abs(threeSum - target) < min){
+                    min = Math.abs(threeSum - target);
+                    closeNum = threeSum;
+                }
+                if(threeSum < target){
+                    while(l < r && nums[l + 1] == nums[l])//二次去重
+                        l++;
+                    l++;
+                }else if(threeSum > target){
+                    while(l < r && nums[r - 1] == nums[r])
+                        r--;
+                    r--;
+                }else{
+                    return target;
+                }
+            }
+        }
+        return closeNum;
     }
 }

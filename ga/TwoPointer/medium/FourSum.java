@@ -1,4 +1,7 @@
 package TwoPointer.medium;
+
+import java.util.List;
+
 //18. 4Sum
 //给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。
 //
@@ -18,5 +21,18 @@ package TwoPointer.medium;
 //]
 public class FourSum {
     //做完这个再考虑kSum吧
+    public static void main(String args[]){
+        int[] nums = new int[]{1, 0, -1, 0, -2, 2};
+        int target = 0;
+        System.out.println(fourSum(nums, target));
+    }
+
+
+    public static List<List<Integer>> fourSum(int[] nums, int target) {
+        return null;
+    }
+
+    //注意去重
+
 
 }
