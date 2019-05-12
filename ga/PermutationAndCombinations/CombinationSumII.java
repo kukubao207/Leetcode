@@ -56,8 +56,10 @@ public class CombinationSumII {
             for(int i = start; i < candidates.length; i++){
                 if(candidates[i] > target)
                     return;
-                if(candidates[i] == lastUsed)
+                if(candidates[i] == lastUsed)//去重
                     continue;
+//                if(i > start && candidates[i] == candidates[i - 1])
+//                    continue;
                 tmp.add(candidates[i]);
                 backtrack(candidates, target - candidates[i], res, tmp, i + 1);
                 lastUsed = tmp.get(tmp.size() - 1);
