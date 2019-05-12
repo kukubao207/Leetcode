@@ -1,9 +1,9 @@
-package PermutationAndCombinations;
+package backtracking;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//60. PermutationAndCombinations Sequence (第k个排列)
+//60. backtracking Sequence (第k个排列)
 //给出集合 [1,2,3,…,n]，其所有元素共有 n! 种排列。
 //
 //按大小顺序列出所有排列情况，并一一标记，当 n = 3 时, 所有排列如下：
