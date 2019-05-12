@@ -18,10 +18,11 @@ import java.util.List;
 //  [3,1,2],
 //  [3,2,1]
 //]
+
 public class Permutations {
     public static void main(String args[]){
         int[] nums = new int[]{1,2,3};
-        System.out.println(permute(nums));
+        System.out.println(permute1(nums));
     }
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
@@ -29,7 +30,7 @@ public class Permutations {
         fullPermutation( res, tmp, nums);
         return res;
     }
-
+    //递归
     public static void fullPermutation(List<List<Integer>> res, List<Integer> tmp, int[] nums){
         if(tmp.size() == nums.length)
             res.add(new ArrayList<Integer>(tmp));
@@ -45,5 +46,25 @@ public class Permutations {
                 }
             }
         }
+    }
+
+    //[[]] → [[1]] → [[1,2],[2,1]] → [[3,1,2],[1,3,2],[1,2,3],[3,2,1],[2,3,1],[2,1,3]]
+    //迭代
+    public static List<List<Integer>> permute1(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        res.add(new ArrayList<>());
+        for(int i = 0; i < nums.length; i++){
+            List<List<Integer>> tmp = new ArrayList<>();//临时数组
+            for(int j = 0; j < res.size(); j++){
+                List<Integer> list = res.get(j);
+                for(int k = 0; k <= list.size(); k++){//存放要插入的位置
+                    List<Integer> t = new ArrayList<>(list);
+                    t.add(k, nums[i]);
+                    tmp.add(t);
+                }
+            }
+            res = tmp;
+        }
+    return res;
     }
 }

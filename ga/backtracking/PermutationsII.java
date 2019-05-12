@@ -18,8 +18,8 @@ import java.util.List;
 //]
 public class PermutationsII {
     public static void main(String args[]){
-        int[] nums = new int[]{3,3,0,3};
-        System.out.println(permuteUnique(nums));
+        int[] nums = new int[]{3,0,3};
+        System.out.println(permuteUnique1(nums));
     }
 
     public static List<List<Integer>> permuteUnique(int[] nums) {
@@ -53,5 +53,29 @@ public class PermutationsII {
                 }
             }
         }
+    }
+
+    //[[]] → [[1]] → [[1,1] → [[2,1,1],[1,2,1],[1,1,2]
+    //迭代
+    public static List<List<Integer>> permuteUnique1(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        res.add(new ArrayList<>());
+        for(int i = 0; i < nums.length; i++){
+            List<List<Integer>> tmp = new ArrayList<>();
+            for(int j = 0; j < res.size(); j++){
+                List<Integer> list = res.get(j);
+                for(int k = 0; k <= list.size(); k++){
+                    if(k > 0 && nums[i] == list.get(k - 1))//去重
+                        continue;
+                    List<Integer> t = new ArrayList<>(list);
+                    t.add(k, nums[i]);
+                    if(!tmp.contains(t))//去重
+                        tmp.add(t);
+                }
+            }
+            res = tmp;
+        }
+        return res;
     }
 }

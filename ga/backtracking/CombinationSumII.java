@@ -33,8 +33,8 @@ import java.util.List;
 //]
 public class CombinationSumII {
     public static void main(String args[]){
-        int[] candidates = new int[]{10,1,2,7,6,1,5};
-        int target = 8;
+        int[] candidates = new int[]{2,5,2,1,2};
+        int target = 5;
         System.out.println(combinationSum2(candidates, target));
     }
     public static List<List<Integer>> combinationSum2(int[] candidates, int target) {
@@ -46,17 +46,23 @@ public class CombinationSumII {
     }
     public static void backtrack(int[] candidates, int target, List<List<Integer>> res, List<Integer> tmp, int start){
         if(target == 0){
-            if(!res.contains(tmp))//这个数组是可重复元素的数组，与上一题不一样
-                res.add(new ArrayList<Integer>(tmp));
+//            if(!res.contains(tmp))//这个数组是可重复元素的数组，与上一题不一样
+            res.add(new ArrayList<Integer>(tmp));
         }
         else if(target < 0)
             return;
         else{
+            int lastUsed = Integer.MIN_VALUE;
             for(int i = start; i < candidates.length; i++){
                 if(candidates[i] > target)
                     return;
+                if(candidates[i] == lastUsed)//去重
+                    continue;
+//                if(i > start && candidates[i] == candidates[i - 1])
+//                    continue;
                 tmp.add(candidates[i]);
                 backtrack(candidates, target - candidates[i], res, tmp, i + 1);
+                lastUsed = tmp.get(tmp.size() - 1);
                 tmp.remove(tmp.size() - 1);
             }
         }
