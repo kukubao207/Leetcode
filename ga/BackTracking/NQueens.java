@@ -29,13 +29,13 @@ import java.util.List;
 
 public class NQueens {
     public static void main(String args[]){
-       int n = 8;
+        int n = 4;
         System.out.println(solveNQueens(n));
     }
 
     public static List<List<String>> solveNQueens(int n) {
         List<int[]> res = new ArrayList<int[]>();
-        List<List<String>> sol = new ArrayList<List<String>>();
+        List<List<String>> solution = new ArrayList<List<String>>();
         int[] position = new int[n + 1];
         String str = "";
         for(int i = 0; i < n; i++)
@@ -50,9 +50,9 @@ public class NQueens {
                     ss.add(strBuilder.toString());
                 }
             }
-            sol.add(ss);
+            solution.add(ss);
         }
-        return sol;
+        return solution;
     }
     public static boolean is_ok(int[] position, int row){
         for(int i = 1; i  < row; i++){
@@ -64,8 +64,11 @@ public class NQueens {
     }
     public static void queen(List<int[]> res, int[] position, int row, int n) {
         if(row == n + 1){//一种解法生成
-            res.add(position);//最后输出的res不知道是什么鬼 感觉又覆盖, position感觉可以正确记录位置
-            System.out.println(Arrays.toString(position));
+            int[] tmp = new int[n + 1];
+            for(int i = 0; i < position.length; i++){
+                tmp[i] = position[i];
+            }
+            res.add(tmp);//new新的数组，不然会被覆盖
         }
         else{
             for(int col = 1; col <= n; col++){//循环列
