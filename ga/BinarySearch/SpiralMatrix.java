@@ -1,71 +1,83 @@
 package BinarySearch;
+
+import java.util.ArrayList;
+import java.util.List;
 //54. Spiral Matrix
 /*
-* 假设按照升序排序的数组在预先未知的某个点上进行了旋转。
+* 给定一个包含 m x n 个元素的矩阵（m 行, n 列），请按照顺时针螺旋顺序，返回矩阵中的所有元素。
 
-( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。
+示例 1:
 
-搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。
-
-你可以假设数组中不存在重复的元素。
-
-你的算法时间复杂度必须是 O(log n) 级别。
-*
-* 示例 1:
-
-输入: nums = [4,5,6,7,0,1,2], target = 0
-输出: 4
+输入:
+[
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+输出: [1,2,3,6,9,8,7,4,5]
 示例 2:
 
-输入: nums = [4,5,6,7,0,1,2], target = 3
-输出: -1
-*
+输入:
+[
+  [1, 2, 3, 4],
+  [5, 6, 7, 8],
+  [9,10,11,12]
+]
+输出: [1,2,3,4,8,12,11,10,9,5,6,7]
 * */
 public class SpiralMatrix {
     public static void main(String args[]){
-        int[] nums = new int[]{5,1,3};
-        int target = 1;
-        System.out.println(search(nums,target));
-    }
-    //这个时间复杂度是多少啊  还是log(n)吗？？？
-    public static int search(int[] nums, int target) {
-        if(nums.length == 0 || nums == null)
-            return -1;
-        int l = 0;
-        int r = nums.length - 1;
-        while(l <= r){
-            if(nums[l] < nums[r]){//排序数组，二分查找
-                return binarySearch(l, r, nums, target);
-            }
-            int mid = (l + r) / 2;
-            if(nums[l] <= nums[mid]){//说明前半段有序（只要数组的开始数小于结尾数就是有序的）
-                if(nums[l] <= target && target <= nums[mid]){//target在有序数组
-                    return binarySearch(l, mid, nums, target);
-                }else{//target在无序数组
-                    l = mid + 1;
-                }
-            }else{//后一段有序
-                if(nums[mid] <= target && target <= nums[r]){//target在有序数组
-                    return binarySearch(mid, r, nums, target);
-                }else{//target在无序数组
-                    r = mid - 1;
-                }
-            }
-        }
-        return -1;
+        int[][] matrix = new int[][]{{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+        System.out.println(spiralOrder(matrix));
     }
 
-    public static int binarySearch(int l ,int r, int[] nums, int target){
-        while(l <= r){
-            int mid = (l + r) / 2;
-            if(nums[mid] < target){
-                l = mid + 1;
-            }else if(nums[mid] > target){
-                r = mid -1;
-            }else{
-                return mid;
+    /*
+     * 大致分为四步，分别是：
+     * 1.从第一行第一个到第一行最后一个；
+     * 2.从第二行最后一个到最后一行最后一个；
+     * 3.从最后一行倒数第二个到最后一行第一个；
+     * 4.从倒数第二行第一个到第二行第一个；
+     * 这就算是顺时针最外围的一个循环，然后后面的跟前面的是类似的不过循环的行和列都加1
+     *
+     * */
+    public static List<Integer> spiralOrder(int[][] matrix) {
+        if(matrix == null || matrix.length ==0)
+            return new ArrayList<>();
+        List<Integer> res = new ArrayList<Integer>();
+        int m = matrix.length;//数组的行
+        int n = matrix[0].length;//数组的列
+        int j = 0;
+        boolean a = false;
+        boolean b = false;
+        boolean c = false;
+        boolean d = false;
+        do{
+            a = false;
+            b = false;
+            c = false;
+            d = false;
+            for(int i = j; i < n - j; i++){
+                res.add(matrix[j][i]);
+                a = true;
             }
-        }
-        return -1;
+            if(a){
+                for(int i = j + 1; i < m - j; i++){
+                    res.add(matrix[i][n - j - 1]);
+                    b = true;
+                }}
+            if(b){
+                for(int i = n - j - 2; i >= j; i--){
+                    res.add(matrix[m - j - 1][i]);
+                    System.out.println(m - j - 1);
+                    c = true;
+                }}
+            if(c){
+                for(int i = m - j - 2; i >= j + 1; i--){
+                    res.add(matrix[i][j]);
+                    d = true;
+                }}
+            j++;
+        }while(a & b & c & d);//判断四个步骤是否被执行，如果没有被执行就说明矩阵的值已经传输完毕
+        return res;
     }
 }
