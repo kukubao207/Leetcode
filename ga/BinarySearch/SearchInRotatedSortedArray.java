@@ -28,6 +28,7 @@ public class SearchInRotatedSortedArray {
         System.out.println(search(nums,target));
     }
     //这个时间复杂度是多少啊  还是log(n)吗？？？
+    //这个可以看一下小王的D:\github\Leetcode\wjq\Array\medium\33. Search in Rotated Sorted Array.java
     public static int search(int[] nums, int target) {
         if(nums.length == 0 || nums == null)
             return -1;
