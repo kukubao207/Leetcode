@@ -27,13 +27,12 @@ import java.util.List;
 //]
 public class NQueens_II {
     public static void main(String args[]){
-        int n = 8;
+        int n = 1;
         System.out.println(totalNQueens(n));
     }
     public static int totalNQueens(int n) {
-        int total = 0;
         int[] position = new int[n + 1];
-        queen(total, position, 1, n);//row和col全从1开始
+        queen(position, 1, n);//row和col全从1开始
         return total;
     }
     public static boolean is_ok(int[] position, int row){
@@ -44,16 +43,17 @@ public class NQueens_II {
         }
         return true;
     }
-    public static void queen(int total, int[] position, int row, int n) {
+    public static int total = 0;//注意声明全局变量
+    public static void queen(int[] position, int row, int n) {
         if(row == n + 1){//一种解法生成
             total++;
-            System.out.println(total);//加不起来
+//            System.out.println(total);//加不起来
         }
         else{
             for(int col = 1; col <= n; col++){//循环列
                 position[row] = col;//row行col列放置皇后
                 if(is_ok(position, row)){
-                    queen(total, position, row + 1, n);
+                    queen(position, row + 1, n);
                 }
             }
         }
