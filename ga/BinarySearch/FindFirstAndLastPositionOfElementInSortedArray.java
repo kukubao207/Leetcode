@@ -15,7 +15,48 @@ package BinarySearch;
 //
 //输入: nums = [5,7,7,8,8,10], target = 6
 //输出: [-1,-1]
+
+import java.util.Arrays;
+
+//这一题也就是找到第一次出现target的数和最后一次出现target的数
 public class FindFirstAndLastPositionOfElementInSortedArray {
+    public static void main(String args[]){
+        int[] nums = new int[]{5,7,7,8,8,10};
+        int target = 8;
+        System.out.println(Arrays.toString(searchRange(nums,target)));
+    }
+    public static int[] searchRange(int[] nums, int target) {
+        int first = firstLarge(nums, target);
+        int last = lastEqual(nums, target);
+        return new int[]{first, last};
+    }
+    public static int firstLarge(int[] nums, int target) {
+        int l = 0;
+        int r = nums.length - 1;
+        while(l <= r){
+            int mid = (l + r) / 2;
+            if(nums[mid] >= target)
+                r = mid - 1;
+            else if(nums[mid] < target)
+                l = mid + 1;
+        }
+        if(l < nums.length && nums[l] == target)
+            return l;
+        return -1;
+    }
 
-
+    public static int lastEqual(int[] nums, int target) {
+        int l = 0;
+        int r = nums.length - 1;
+        while(l <= r){
+            int mid = (l + r) / 2;
+            if(nums[mid] <= target)
+                l = mid + 1;
+            else if(nums[mid] > target)
+                r = mid - 1;
+        }
+        if(r >= 0 && nums[r] == target)
+            return r;
+        return -1;
+    }
 }
