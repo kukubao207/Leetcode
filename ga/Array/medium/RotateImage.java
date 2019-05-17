@@ -1,4 +1,7 @@
 package Array.medium;
+
+import java.util.Arrays;
+
 //48. 旋转图像
 //给定一个 n × n 的二维矩阵表示一个图像。
 //
@@ -41,4 +44,28 @@ package Array.medium;
 //  [16, 7,10,11]
 //]
 public class RotateImage {
+    public static void main(String args[]){
+        int[][] matrix = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
+        rotate(matrix);
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix.length; j++){
+                System.out.println(matrix[i][j]);
+            }
+        }
+
+    }
+    //每次对4个数进行交换
+    public static void rotate(int[][] matrix) {
+//        int n = matrix.length % 2 == 0 ? matrix.length / 2 : matrix.length / 2 + 1;
+        int n = matrix.length / 2;
+        for(int i = 0; i < n; i++){
+            for(int j = i; j < matrix.length - 1 - i; j++){
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[matrix.length - 1 - j][i];
+                matrix[matrix.length - 1 - j][i] = matrix[matrix.length - 1 - i][matrix.length - 1 - j];
+                matrix[matrix.length - 1 - i][matrix.length - 1 - j] = matrix[j][matrix.length - 1 - i];
+                matrix[j][matrix.length - 1 - i] = tmp;
+            }
+        }
+    }
 }
