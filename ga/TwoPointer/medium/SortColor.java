@@ -1,4 +1,7 @@
 package TwoPointer.medium;
+
+import java.util.Arrays;
+
 //75. 颜色分类
 //给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
 //
@@ -17,4 +20,36 @@ package TwoPointer.medium;
 //首先，迭代计算出0、1 和 2 元素的个数，然后按照0、1、2的排序，重写当前数组。
 //你能想出一个仅使用常数空间的一趟扫描算法吗？
 public class SortColor {
+    public static void main(String args[]){
+        int[] nums = new int[]{2,0,2,1,1,0};
+        System.out.println(Arrays.toString(sortColors(nums)));
+    }
+//一次遍历，如果是0，则移动到表头，如果是2，则移动到表尾，不用考虑1。
+    public static int[] sortColors(int[] nums) {
+        int left = -1;
+        int right = nums.length;
+        for(int i = 0; i < nums.length; i++){
+            if(i < right) {
+                if (nums[i] < 1) {
+                    swap(nums, i, ++left);
+                } else if (nums[i] > 1) {
+                    swap(nums, i, --right);
+                    i--;
+                }
+            }
+        }
+        return nums;
+    }
+
+//    public static void swap(int a, int b){//报错,只传值，注意一下
+//        int tmp = a;
+//        a = b;
+//        b = tmp;
+//    }
+
+    public static void swap(int[] num, int a, int b){
+        int temp = num[a];
+        num[a] = num[b];
+        num[b] = temp;
+    }
 }
