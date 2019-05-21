@@ -35,4 +35,35 @@ package TwoPointer.medium;
 //    print(nums[i]);
 //}
 public class RemoveDuplicatesFromSortedArray_II {
+    //双指针
+    public int removeDuplicates(int[] nums) {
+        if(nums.length == 0)
+            return 0;
+        int index = 0;
+        int count = 1;//count记录nums[index]的数量
+        for(int i = 1; i < nums.length; i++){//两种情况添加nums[index]
+            if(nums[i] != nums[i - 1]){
+                index++;
+                count = 1;
+                nums[index] = nums[i];
+            }else if(nums[i] == nums[i - 1] && count == 1){
+                index++;
+                count++;
+                nums[index] = nums[i];
+            }
+        }
+        return index + 1;
+    }
+    //使用递归
+    public int removeDuplicates1(int[] nums) {
+        int i = 0;
+        for(int n : nums){
+            if(i < 2 || n > nums[i - 2]){
+                nums[i] = n;
+                i++;
+            }
+        }
+        return i;
+    }
+
 }
