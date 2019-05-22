@@ -19,4 +19,35 @@ package BinarySearch;
 //这是 搜索旋转排序数组 的延伸题目，本题中的 nums  可能包含重复元素。
 //这会影响到程序的时间复杂度吗？会有怎样的影响，为什么？
 public class SearchInRotatedSortedArray_II {
+    public static void main(String args[]){
+        int[] nums = new int[]{5,1};
+        int target = 1;
+        System.out.println(search(nums,target));
+    }
+    public static boolean search(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while(left <= right){
+            int mid = (left + right) / 2;
+            if(nums[mid] == target)
+                return true;
+            if(nums[left] < nums[mid]){//前半部分有序
+                if(target >= nums[left] && target < nums[mid]){
+                    right = mid - 1;
+                }else{
+                    left = mid + 1;
+                }
+            }
+            else if(nums[left] > nums[mid]){//后半部分有序
+                if(target <= nums[right] && target > nums[mid]){
+                    left = mid + 1;
+                }else{
+                    right = mid - 1;
+                }
+            }else{
+                left = left + 1;
+            }
+        }
+        return false;
+    }
 }
