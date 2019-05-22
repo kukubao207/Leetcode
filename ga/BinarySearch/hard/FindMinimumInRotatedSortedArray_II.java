@@ -21,4 +21,23 @@ package BinarySearch.hard;
 //这道题是 寻找旋转排序数组中的最小值 的延伸题目。
 //允许重复会影响算法的时间复杂度吗？会如何影响，为什么？
 public class FindMinimumInRotatedSortedArray_II {
+    public static void main(String args[]){
+        int[] nums = new int[]{3,1};
+        System.out.println(findMin(nums));
+    }
+    public static int findMin(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while(left < right) {
+            int mid = (left + right) / 2;
+            if(nums[mid] > nums[right]){//右逆序，左边肯定顺序
+                left = mid + 1;
+            }else if(nums[mid] < nums[right]){//右顺序
+                right = mid;
+            }else{
+                right = right - 1;
+            }
+        }
+        return nums[left];
+    }
 }

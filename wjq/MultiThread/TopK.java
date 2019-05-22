@@ -1,11 +1,9 @@
-package tx;
-
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class Main {
+public class TopK {
     public static File[] filelist = new File[100000];   //存放文件
     public static int idx = 0;                          //统计总文件数量
     public static List<File> res = new ArrayList<>();   //存放结果
