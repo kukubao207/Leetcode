@@ -1,4 +1,4 @@
-package BinarySearch;
+package BinarySearch.medium;
 //33. Search in Rotated Sorted Array
 /*
 * 假设按照升序排序的数组在预先未知的某个点上进行了旋转。
