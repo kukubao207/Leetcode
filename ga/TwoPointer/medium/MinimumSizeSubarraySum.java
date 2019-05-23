@@ -11,4 +11,26 @@ package TwoPointer.medium;
 //
 //如果你已经完成了O(n) 时间复杂度的解法, 请尝试 O(n log n) 时间复杂度的解法。
 public class MinimumSizeSubarraySum {
+    //这个时间复杂度是O(nlogn)吗？？？
+    //滑动窗口模块，i，j分别记录窗口的起始位置，如果窗口的和大于s，则i++，如果和小于s，则j++
+    public int minSubArrayLen(int s, int[] nums) {
+        int i = 0;
+        int j = -1;
+        int sum = 0;
+        int len = nums.length + 1;
+        while(i < nums.length){
+            if(j + 1 < nums.length && sum < s){
+                j++;
+                sum = sum + nums[j];
+            }else{
+                sum = sum - nums[i];
+                i++;
+            }
+            if(sum >= s)
+                len = Math.min(len, j - i + 1);
+        }
+        if(len == nums.length + 1)
+            return 0;
+        return len;
+    }
 }

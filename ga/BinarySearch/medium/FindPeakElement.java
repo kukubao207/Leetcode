@@ -23,4 +23,34 @@ package BinarySearch.medium;
 //
 //你的解法应该是 O(logN) 时间复杂度的。
 public class FindPeakElement {
+    //时间复杂度O(n)
+    public int findPeakElement(int[] nums) {
+        if(nums.length == 1)
+            return 0;
+        if(nums[0] > nums[1])
+            return 0;
+        for(int i = 1; i < nums.length - 1; i++){
+            if(nums[i] > nums[i + 1] && nums[i] > nums[i - 1])
+                return i;
+        }
+        if(nums[nums.length - 1] > nums[nums.length - 2])
+            return nums.length - 1;
+        return -1;
+    }
+    //规律一：如果nums[i] > nums[i+1]，则在i之前一定存在峰值元素
+    //规律二：如果nums[i] < nums[i+1]，则在i+1之后一定存在峰值元素
+    public int findPeakElement1(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while(left < right){
+            int mid = (left + right) / 2;
+            if(nums[mid] > nums[mid + 1])
+                right = mid;
+            else
+                left = mid + 1;
+        }
+        return left;
+    }
+
+
 }
