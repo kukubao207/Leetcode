@@ -19,4 +19,30 @@ package LinkedList.hard;
 //你的算法只能使用常数的额外空间。
 //你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
 public class ReverseNodesInKGroup {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        int length = 0;
+        ListNode cur = head;
+        while(cur != null && length != k){
+            cur = cur.next;
+            length++;
+        }
+        if(length == k){
+            ListNode aft = reverseKGroup(cur, k);
+            while(k > 0){
+                ListNode next = head.next;
+                head.next = aft;
+                aft = head;
+                head = next;
+                k--;
+            }
+            return aft;
+        }
+        return head;
+    }
+
+    public static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
+    }
 }
