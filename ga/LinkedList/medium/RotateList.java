@@ -19,4 +19,32 @@ package LinkedList.medium;
 //向右旋转 3 步: 0->1->2->NULL
 //向右旋转 4 步: 2->0->1->NULL
 public class RotateList {
+    //1、将链表首尾连起来
+    // 2、计算链表长度 L，则 迭代 L - k % L 次就是新的链表头
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null || head.next == null)
+            return head;
+        ListNode cur = head;
+        int length = 1;
+        while(cur.next != null){
+            length++;
+            cur = cur.next;
+        }
+        cur.next = head;
+        int loop = length - k % length;
+        if(loop == length)
+            loop = 0;
+        for(int i = 0; i < loop; i++){
+            cur = cur.next;
+        }
+        ListNode res = cur.next;
+        cur.next = null;
+        return res;
+    }
+
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
+    }
 }
