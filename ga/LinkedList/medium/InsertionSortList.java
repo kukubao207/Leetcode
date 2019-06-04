@@ -1,4 +1,7 @@
 package LinkedList.medium;
+
+import java.util.List;
+
 //147. 对链表进行插入排序
 //对链表进行插入排序。
 //
@@ -23,5 +26,62 @@ package LinkedList.medium;
 //
 //输入: -1->5->3->4->0
 //输出: -1->0->3->4->5
-public interface InsertionSortList {
+public class InsertionSortList {
+    //递归
+    public ListNode insertionSortList(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        if(head == null || head.next == null)
+            return head;
+        ListNode subSortList = insertionSortList(head.next);
+        dummy.next = subSortList;
+        ListNode cur = subSortList;
+        ListNode pre = null;
+        while(cur != null){
+            if(cur.val >= head.val){
+                if(pre != null){
+                    pre.next = head;
+                    head.next = cur;
+                }else{
+                    dummy.next = head;
+                    head.next = cur;
+                }
+                return dummy.next;
+            }
+            pre = cur;
+            cur = cur.next;
+        }
+        pre.next = head;
+        head.next = null;
+        return dummy.next;
+    }
+
+    //迭代
+    public ListNode insertionSortList1(ListNode head) {
+        if( head == null || head.next == null){
+            return head;
+        }
+        ListNode dummy = new ListNode(0);
+        ListNode cur = head;
+        ListNode pre = dummy;
+        ListNode next = null;
+        while(cur != null){
+            next = cur.next;
+            while(pre.next != null && pre.next.val < cur.val){
+                pre = pre.next;
+            }
+            cur.next = pre.next;
+            pre.next = cur;
+            pre = dummy;
+            cur = next;
+        }
+        return dummy.next;
+    }
+
+
+
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
+    }
 }
