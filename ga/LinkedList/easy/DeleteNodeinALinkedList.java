@@ -27,4 +27,19 @@ package LinkedList.easy;
 //给定的节点为非末尾节点并且一定是链表中的一个有效节点。
 //不要从你的函数中返回任何结果。
 public class DeleteNodeinALinkedList {
+    //无head
+   //node就是链表的一部分，直接在上面操作
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+
+    public class ListNode
+    {
+        int val;
+        ListNode next;
+        public ListNode(int x){
+            val = x;
+        }
+    }
 }
