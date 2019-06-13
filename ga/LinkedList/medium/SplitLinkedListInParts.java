@@ -1,4 +1,8 @@
 package LinkedList.medium;
+
+import java.util.ArrayList;
+import java.util.List;
+
 // 725. Split Linked List in Parts
 //给定一个头结点为 root 的链表, 编写一个函数以将链表分隔为 k 个连续的部分。
 //
@@ -35,4 +39,46 @@ package LinkedList.medium;
 //输入的每个节点的大小范围：[0, 999].
 //k 的取值范围： [1, 50].
 public class SplitLinkedListInParts {
+    //先获取连表长度，然后length/k均分，然后前length%k长度再加一，注意如果length<k的情况
+    public ListNode[] splitListToParts(ListNode root, int k) {
+        ListNode cur = root;
+        int length = 0;
+        while(cur != null){
+            length++;
+            cur = cur.next;
+        }
+        ListNode[] res = new ListNode[k];
+        int subSize = length / k;
+        int addSize = length % k;
+        for(int i = 0; i < k; i++){
+            res[i] = root;
+            for(int j = 1; j < subSize; j++){
+                if(root == null)
+                    break;
+                root = root.next;
+            }
+            if(root == null)
+                break;
+            if(addSize > 0){
+                addSize--;
+                if(subSize != 0)//特殊情况
+                    root = root.next;
+            }
+            ListNode next = root.next;
+            root.next = null;
+            root = next;
+        }
+        return res;
+    }
+
+
+
+    public class ListNode
+    {
+        int val;
+        ListNode next;
+        public ListNode(int x){
+            val = x;
+        }
+    }
 }

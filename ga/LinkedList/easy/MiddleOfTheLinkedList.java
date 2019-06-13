@@ -1,4 +1,4 @@
-package LinkedList.medium;
+package LinkedList.easy;
 // 876. 链表的中间结点
 // 给定一个带有头结点 head 的非空单链表，返回链表的中间结点。
 //
@@ -24,4 +24,25 @@ package LinkedList.medium;
 //
 //给定链表的结点数介于 1 和 100 之间。
 public class MiddleOfTheLinkedList {
+    //寻找中间节点
+    //快慢指针
+    public ListNode middleNode(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return  slow;
+    }
+
+    public class ListNode
+    {
+        int val;
+        ListNode next;
+        public ListNode(int x){
+            val = x;
+        }
+    }
+
 }

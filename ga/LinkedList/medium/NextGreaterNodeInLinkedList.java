@@ -30,5 +30,69 @@ package LinkedList.medium;
 //给定列表的长度在 [0, 10000] 范围内
 //
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 public class NextGreaterNodeInLinkedList {
+    //1.动态规划，先遍历一遍链表，将所有值存储到数组中，反向遍历数组，设 dp[i] 值为索引 i 时的下一个最大值，则 dp 推进公式为：
+    //if nums[i + 1] > nums[i] then dp[i] = nums[i + 1]
+    //if nums[i + 1] == nums[i] then dp[i] = dp[i + 1]
+    //else dp[i] = { 遍历 dp[i + 1] ... dp[n]，寻找最近大于 nums[i] 的值，遇到 0 停止遍历，遇到 0 表示后面没有更大的值了 }
+    public int[] nextLargerNodes(ListNode head) {
+        List list = new ArrayList<Integer>();
+        ListNode cur = head;
+        while(cur != null){
+            list.add(cur.val);
+            cur = cur.next;
+        }
+        int size = list.size();
+        int[] dp = new int[size];//最后一个元素肯定是0
+        for(int i = size - 2; i >= 0;i--){
+            if((int)list.get(i + 1) > (int)list.get(i))
+                dp[i] = (int)list.get(i + 1);
+            else if((int)list.get(i + 1) == (int)list.get(i))
+                dp[i] = dp[i + 1];
+            else{
+                for(int j = i + 1; j < size; j++){
+                    if(dp[j] > (int)list.get(i) || dp[j] == 0){
+                        dp[i] = dp[j];
+                        break;
+                    }
+                }
+            }
+        }
+        return dp;
+    }
+
+    //使用栈
+    //固定一个数b，往前看（存入栈中），哪一个数a小于这个数b（小于就删除），即a的下一个更大节点为b
+    public int[] nextLargerNodes1(ListNode head) {
+        List list = new ArrayList<Integer>();
+        ListNode cur = head;
+        while(cur != null){
+            list.add(cur.val);
+            cur = cur.next;
+        }
+        int size = list.size();
+        int[] res = new int[size];//最后一个元素肯定是0
+        Stack<Integer> stack = new Stack<Integer>();
+        for(int i = 0; i < size; i++){
+            while(!stack.isEmpty() && (int)list.get(stack.peek()) < (int)list.get(i)){
+                res[stack.pop()] = (int)list.get(i);
+            }
+            stack.push(i);
+        }
+        return res;
+    }
+
+    public class ListNode
+    {
+        int val;
+        ListNode next;
+        public ListNode(int x){
+            val = x;
+        }
+    }
+
 }

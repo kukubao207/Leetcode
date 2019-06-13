@@ -30,5 +30,39 @@ package LinkedList.medium;
 //G 是链表中所有结点的值的一个子集.
 //
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LinkedListComponents {
+    //利用hashset存储
+    public int numComponents(ListNode head, int[] G) {
+        Set<Integer> set = new HashSet<>();
+        for(int g: G)
+            set.add(g);
+        int count = 0;
+        boolean flag = false;//标识，在G中则为true
+        while(head != null){
+            if(set.contains(head.val)){
+                flag = true;
+                if(head.next == null)
+                    count++;
+            }else{
+                if(flag){
+                    count++;
+                    flag = false;
+                }
+            }
+            head = head.next;
+        }
+        return count;
+    }
+
+    public class ListNode
+    {
+        int val;
+        ListNode next;
+        public ListNode(int x){
+            val = x;
+        }
+    }
 }
