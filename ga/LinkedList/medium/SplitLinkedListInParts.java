@@ -81,4 +81,30 @@ public class SplitLinkedListInParts {
             val = x;
         }
     }
+
+    // 先均分，均分完剩下的节点，平摊到前面的链表中去。
+    public ListNode[] splitListToParts_other(ListNode root, int k) {
+        ListNode[] parts = new ListNode[k];
+
+        ListNode cur = root;
+        int length = 0;
+        while(cur != null){
+            length++;
+            cur = cur.next;
+        }
+        ListNode[] res = new ListNode[k];
+        int subSize = length / k;
+        int addSize = length % k;
+
+        ListNode node = root, prev = null;
+        for (int i = 0; node != null && i < k; i++, addSize--) {
+            parts[i] = node;
+            for (int j = 0; j < subSize + (addSize > 0 ? 1 : 0); j++) {
+                prev = node;
+                node = node.next;
+            }
+            prev.next = null;
+        }
+        return parts;
+    }
 }

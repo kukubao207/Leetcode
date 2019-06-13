@@ -65,4 +65,16 @@ public class LinkedListComponents {
             val = x;
         }
     }
+    public int numComponents_others(ListNode head, int[] G) {
+        Set<Integer> set = new HashSet<>();
+        for(int g: G)
+            set.add(g);
+        int count = 0;
+        while(head != null){
+            if(set.contains(head.val)&&(head.next==null||!set.contains(head.next.val)))
+                count++;
+            head = head.next;
+        }
+        return count;
+    }
 }
