@@ -71,7 +71,7 @@ public class LinkedListComponents {
             set.add(g);
         int count = 0;
         while(head != null){
-            if(set.contains(head.val)&&(head.next==null||!set.contains(head.next.val)))
+            if(set.contains(head.val) && (head.next==null || !set.contains(head.next.val)))
                 count++;
             head = head.next;
         }
