@@ -31,6 +31,7 @@ public class UniqueBinarySearchTrees_II {
         return generateTrees(1, n);
     }
 
+    //递归
     public List<TreeNode> generateTrees(int start, int end) {
         List<TreeNode> res = new ArrayList<TreeNode>();
         if(start == end){
