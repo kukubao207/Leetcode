@@ -22,8 +22,8 @@ import java.util.Queue;
 //  [15,7]
 //]
 public class BinaryTreeLevelOrderTraversal {
-    //层次遍历是BFS(需要用队列)
-    //先中后序遍历是DFS(递归或者栈)
+    //层次遍历是BFS(需要用队列)  //按照高度顺序一层一层的访问整棵树，高层次的节点将会比低层次的节点先被访问到。
+    //先中后序遍历是DFS(递归或者栈)  //采用深度作为优先级，以便从跟开始一直到达某个确定的叶子，然后再返回根到达另一个分支。
     public List<List<Integer>> levelOrder(TreeNode root) {
         if(root == null)
             return new ArrayList();
