@@ -1,4 +1,8 @@
 package Tree.medium;
+
+import java.util.ArrayList;
+import java.util.List;
+
 //129. Sum Root to Leaf Numbers
 //Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
 //
@@ -34,4 +38,35 @@ package Tree.medium;
 //The root-to-leaf path 4->0 represents the number 40.
 //Therefore, sum = 495 + 491 + 40 = 1026.
 public class SumRootToLeafNumbers {
+    //回溯
+    int total = 0;
+    public int sumNumbers(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        dfs(root, list);
+        return total;
+    }
+
+    public void dfs(TreeNode root, List<Integer> list){
+        if(root == null)
+            return;
+        list.add(root.val);
+        if(root.left == null && root.right == null)
+            total = total + toSum(list);
+        dfs(root.left, list);
+        dfs(root.right, list);
+        list.remove(list.size() - 1);
+    }
+    public int toSum(List<Integer> list){
+        String number = "";
+        for(Integer l: list)
+            number = number + l;
+        return Integer.parseInt(number);
+    }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
