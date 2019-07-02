@@ -25,5 +25,28 @@ package Tree.medium;
 //
 //All of the nodes' values will be unique.
 //p and q are different and both values will exist in the binary tree.
-public class LowestCommonAncestorOfABinaryTree {
+public class LowestCommonAncestorOfABinaryTree {//所有的递归的返回值有4种可能性，null、p、q、公共祖先
+    //注意p,q必然存在树内, 且所有节点的值唯一!!
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null)
+            return null;
+        if(root == p || root == q)
+            return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);//返回的结点进行保存，可能是null
+        TreeNode right = lowestCommonAncestor(root.right, p, q);//也可能是pq，还可能是公共祖先
+        if (left != null && right != null)
+            return root;
+        else if(left != null)
+            return left;
+        else if(right != null)
+            return right;
+        return null;
+    }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
