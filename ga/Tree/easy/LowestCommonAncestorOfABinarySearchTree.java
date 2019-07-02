@@ -26,20 +26,4 @@ package Tree.easy;
 //All of the nodes' values will be unique.
 //p and q are different and both values will exist in the BST.
 public class LowestCommonAncestorOfABinarySearchTree {
-    //递归
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if((root.val - p.val) * (root.val - q.val) <= 0)
-            return root;
-        else if((p.val > root.val) && (q.val > root.val))
-            return lowestCommonAncestor(root.right, p, q);
-        else
-            return lowestCommonAncestor(root.left, p, q);
-    }
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
 }
