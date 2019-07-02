@@ -26,4 +26,30 @@ package Tree.easy;
 //2.  5 -> 2 -> 1
 //3. -3 -> 11
 public class PathSum_III {
+    //双重递归
+    //首先先序递归遍历每个节点，再以每个节点作为起始点递归寻找满足条件的路径。
+    public int pathSum(TreeNode root, int sum) {//先序遍历
+       if(root == null)
+           return 0;
+        dfs(root, sum);
+        pathSum(root.left, sum);
+        pathSum(root.right, sum);
+        return count;
+    }
+    int count = 0;
+    public void dfs(TreeNode root, int sum){
+        if(root == null)
+            return;
+        sum = sum - root.val;
+        if(sum == 0)
+            count++;
+        dfs(root.left, sum);
+        dfs(root.right, sum);
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
