@@ -14,4 +14,23 @@ package Tree.easy;
 //            /   \
 //          20     13
 public class ConvertBSTToGreaterTree {
+    //BST的中序遍历就是从小到大,那么反过来就是从大到小,然后累加就好了.
+    int num = 0;
+    public TreeNode convertBST(TreeNode root) {
+       if(root == null)
+           return null;
+        convertBST(root.right);
+        root.val = root.val + num;
+        num = root.val;
+        convertBST(root.left);
+        return root;
+    }
+
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }

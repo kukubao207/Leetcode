@@ -22,4 +22,22 @@ package Tree.easy;
 //The sum of node values in any subtree won't exceed the range of 32-bit integer.
 //All the tilt values won't exceed the range of 32-bit integer.
 public class BinaryTreeTilt {
+    //递归
+    public int findTilt(TreeNode root) {
+        if(root == null)
+            return 0;
+       return Math.abs(getSum(root.left) - getSum(root.right)) + findTilt(root.left) + findTilt(root.right);//该节点的坡度+左右子树坡度
+    }
+
+    public int getSum(TreeNode root){
+        if(root == null)
+            return 0;
+        return getSum(root.left) + getSum(root.right) + root.val;
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
