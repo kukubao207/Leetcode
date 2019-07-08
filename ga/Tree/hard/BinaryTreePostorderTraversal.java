@@ -56,6 +56,29 @@ public class BinaryTreePostorderTraversal {
         return res;
     }
 
+    //3.迭代（主要就是push和pop两步）
+    public List<Integer> postorderTraversal2(TreeNode root) {
+        List res = new ArrayList<>();
+        if(root == null)
+            return res;
+        Stack<TreeNode> stack  = new Stack<>();
+        TreeNode pre = null;
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode cur = stack.peek();
+            if(cur.left == null && cur.right == null ||
+                    (pre != null && (pre == cur.left || pre == cur.right))){//如果当前结点左右子节点为空或上一个访问的结点为当前结点的子节点时，当前结点出栈(万一右孩子为空时，pre=cur.left)
+                pre = cur;
+                res.add(cur.val);
+                stack.pop();
+            }else{//pop的时候才是从左到右
+                if(cur.right != null) stack.push(cur.right);//先将右结点压栈
+                if(cur.left != null) stack.push(cur.left); //再将左结点入栈
+            }
+        }
+        return res;
+    }
+
 
     public class TreeNode {
         int val;

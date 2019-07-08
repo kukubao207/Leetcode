@@ -18,7 +18,7 @@ import java.util.Stack;
 //
 //Output: [1,2,3]
 //Follow up: Recursive solution is trivial, could you do it iteratively?
-public class BinaryTreePreorderTraversal {
+public class BinaryTreePreorderTraversal {//时间复杂度O(n)
     //先序遍历
     //1.递归
     public List<Integer> preorderTraversal(TreeNode root) {
@@ -53,6 +53,26 @@ public class BinaryTreePreorderTraversal {
         }
         return res;
     }
+
+
+    //3.迭代
+    public List<Integer> preorderTraversal2(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if(root == null)
+            return res;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode cur = stack.pop();
+            res.add(cur.val);
+            if(cur.right != null)
+                stack.push(cur.right);
+            if(cur.left != null)
+                stack.push(cur.left);
+        }
+        return res;
+    }
+
 
     public class TreeNode {
         int val;

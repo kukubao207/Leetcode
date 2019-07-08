@@ -30,4 +30,37 @@ package Tree.easy;
 //Explanation: Almost the same as the first example,
 //except we can't omit the first parenthesis pair to break the one-to-one mapping relationship between the input and the output.
 public class ConstructStringFromBinaryTree {
+    //时间复杂度O(n)
+    StringBuilder sb = new StringBuilder();
+    public String tree2str(TreeNode t) {
+        preOrder(t);
+        return sb.toString();
+    }
+    // 可以利用先序遍历解答
+    public void preOrder(TreeNode t){
+        if(t == null)
+            return;
+        sb.append(t.val);
+        if(t.left == null && t.right != null)//没有左孩子的时候才要加括号，没有右孩子的时候不需要加
+            sb.append("()");
+        if(t.left != null){
+            sb.append("(");
+            preOrder(t.left);
+            sb.append(")");
+        }
+        if(t.right != null){
+            sb.append("(");
+            preOrder(t.right);
+            sb.append(")");
+        }
+    }
+
+
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
