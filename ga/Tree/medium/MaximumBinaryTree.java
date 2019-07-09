@@ -21,4 +21,36 @@ package Tree.medium;
 //Note:
 //The size of the given array will be in the range [1,1000].
 public class MaximumBinaryTree {
+    //时间复杂度O(n*n)
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        if(nums.length == 0)
+            return null;
+        return helper(nums, 0, nums.length - 1);
+    }
+    public TreeNode helper(int[] nums, int start, int end){
+        if(start > end)
+            return null;
+        int maxIndex = getMax(nums, start, end);
+        TreeNode node = new TreeNode(nums[maxIndex]);
+        node.left = helper(nums, start, maxIndex - 1);
+        node.right = helper(nums, maxIndex + 1, end);
+        return node;
+    }
+    public int getMax(int[] nums, int start, int end){
+        int max = nums[start];
+        int maxIndex = start;
+        for(int i = start + 1; i <= end; i++){
+            if(nums[i] > max){
+                max = nums[i];
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
