@@ -35,4 +35,26 @@ package Tree.easy;
 //  /
 // 1
 public class TrimABinarySearchTree {
+    //递归
+    //时间复杂度O(n)
+    //前序遍历二叉树，如果节点数值不符合[L,R]，就修改父节点的指针
+    public TreeNode trimBST(TreeNode root, int L, int R) {
+        if(root == null)
+            return null;
+        if(root.val < L)
+            return trimBST(root.right, L, R);
+        if(root.val > R)
+            return trimBST(root.left, L, R);
+        if(root.val >= L && root.val <= R){
+            root.left = trimBST(root.left, L, R);
+            root.right = trimBST(root.right, L, R);
+        }
+        return root;
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
