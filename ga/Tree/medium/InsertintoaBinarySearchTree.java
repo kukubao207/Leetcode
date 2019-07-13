@@ -30,4 +30,47 @@ package Tree.medium;
 //         \
 //          4
 public class InsertintoaBinarySearchTree {
+    //1.递归
+    //时间复杂度O(nlogn)
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if(root == null)
+            return new TreeNode(val);
+        if(val < root.val)
+            root.left = insertIntoBST(root.left, val);
+        if(val > root.val)
+            root.right = insertIntoBST(root.right, val);
+        return root;
+    }
+
+    //2.迭代
+    //时间复杂度O(n)
+    public TreeNode insertIntoBST1(TreeNode root, int val) {
+        if (root == null) {
+            root = new TreeNode(val);
+        }
+        TreeNode p = root;
+        while(p != null){
+            if(val < p.val){
+                if(p.left == null){
+                    p.left = new TreeNode(val);
+                    break;
+                }
+                p = p.left;
+            }
+            if(val > p.val){
+                if(p.right == null){
+                    p.right = new TreeNode(val);
+                    break;
+                }
+                p = p.right;
+            }
+        }
+        return root;
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }

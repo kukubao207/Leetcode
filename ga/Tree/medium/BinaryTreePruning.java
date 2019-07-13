@@ -32,4 +32,21 @@ package Tree.medium;
 //The binary tree will have at most 100 nodes.
 //The value of each node will only be 0 or 1.
 public class BinaryTreePruning {
+    //要使用后序遍历
+    //时间复杂度O(nlogn)
+    public TreeNode pruneTree(TreeNode root) {
+        if(root == null)
+            return null;
+        root.left = pruneTree(root.left);
+        root.right = pruneTree(root.right);
+        if(root.left == null && root.right == null)//关键是从底往上剪,也就是从叶子节点,如果叶子节点为0,就None
+            return root.val == 0 ? null : root;
+        return root;
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }

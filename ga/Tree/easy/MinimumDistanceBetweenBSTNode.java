@@ -23,4 +23,29 @@ package Tree.easy;
 //The size of the BST will be between 2 and 100.
 //The BST is always valid, each node's value is an integer, and each node's value is different.
 public class MinimumDistanceBetweenBSTNode {
+    //中序遍历
+    //时间复杂度O(nlogn)
+    int minPlus = Integer.MAX_VALUE;
+    TreeNode pre;
+    public int minDiffInBST(TreeNode root) {
+        if(root == null)
+            return -1;
+        inOrder(root);
+        return minPlus;
+    }
+    public void inOrder(TreeNode root){
+        if(root == null)
+            return;
+        inOrder(root.left);
+        if(pre != null)
+            minPlus = Math.min(root.val - pre.val, minPlus);
+        pre = root;
+        inOrder(root.right);
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }

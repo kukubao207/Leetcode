@@ -34,4 +34,29 @@ package Tree.easy;
 //
 //Note: The given binary tree has not more than 10000 nodes. The height of the tree is not more than 1000.
 public class LongestUnivaluePath {
+    //递归
+    int maxPath = 0;
+    public int longestUnivaluePath(TreeNode root) {
+        if(root == null)
+            return 0;
+        getMaxPath(root, root.val);
+        return maxPath;
+    }
+    //以每个点为值得最长路径
+    public int getMaxPath(TreeNode root, int val){
+        if(root == null)
+            return 0;
+        int left = getMaxPath(root.left, root.val);
+        int right = getMaxPath(root.right, root.val);
+        maxPath = Math.max(maxPath, left + right);
+        if(root.val == val)// 和父节点值相同才返回以当前节点所能构成的最长通知路径长度, 否则返回0
+            return Math.max(left, right) + 1;
+        return 0;
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
