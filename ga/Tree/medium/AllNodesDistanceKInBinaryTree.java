@@ -33,7 +33,48 @@ import java.util.*;
 //0 <= K <= 1000.
 public class AllNodesDistanceKInBinaryTree {
     //1.先建立图(dfs)然后bfs dfs+bfs
-
+    List<HashSet<Integer>> graph = new ArrayList<>();
+    public List<Integer> distanceK1(TreeNode root, TreeNode target, int K) {
+        for(int i = 0; i < 1000; i++)
+            graph.add(new HashSet<>());
+        buildGraph(graph, root);
+        Queue<Integer> queue = new LinkedList<>();
+        HashSet<Integer> seenSet = new HashSet();
+        List<Integer> res = new ArrayList<>();
+        int level = 0;
+        queue.add(target.val);
+        seenSet.add(target.val);
+        while(!queue.isEmpty()){
+            List<Integer> list = new ArrayList<>();
+            int count = queue.size();
+            while(count > 0){
+                Integer val = queue.poll();
+                list.add(val);
+                for(int child: graph.get(val))
+                    if(seenSet.add(child))
+                        queue.add(child);
+                count--;
+            }
+            if(level == K)
+                res = new ArrayList<>(list);
+            level = level + 1;
+        }
+        return res;
+    }
+    public void buildGraph(List<HashSet<Integer>> graph, TreeNode node){
+        if(node == null)
+            return;
+        if(node.left != null){
+            graph.get(node.val).add(node.left.val);
+            graph.get(node.left.val).add(node.val);
+            buildGraph(graph, node.left);
+        }
+        if(node.right != null){
+            graph.get(node.val).add(node.right.val);
+            graph.get(node.right.val).add(node.val);
+            buildGraph(graph, node.right);
+        }
+    }
     //2.直接二叉树上操作就可以，先用dfs找到target以及记录下target的parent，
     // 然后对target到离target为K的parent进行K到0的层次遍历就可以得到答案。要注意已经层次遍历过的节点不要再次层次遍历，否则答案会错误
 
@@ -66,10 +107,9 @@ public class AllNodesDistanceKInBinaryTree {
                     queue.add(pmap.get(node));
                 count--;
             }
-            if(level++ == k)
+            if(level == k)//后加
                 res = new ArrayList<>(subRes);
-            else
-                subRes.clear();
+            level = level + 1;
         }
         return res;
     }

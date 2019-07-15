@@ -1,4 +1,8 @@
 package Tree.medium;
+
+import java.util.ArrayList;
+import java.util.List;
+
 //894. All Possible Full Binary Trees
 //A full binary tree is a binary tree where each node has exactly 0 or 2 children.
 //
@@ -22,4 +26,35 @@ package Tree.medium;
 //
 //1 <= N <= 20
 public class AllPossibleFullBinaryTrees {
+    public List<TreeNode> allPossibleFBT(int N) {
+        //偶数是不能构成满二叉树的
+        List<TreeNode> res = new ArrayList<>();
+        if(N % 2 == 0)
+            return res;
+        if(N == 1){
+            TreeNode root = new TreeNode(0);
+            res.add(root);
+            return res;
+        }
+        for(int i = 1; i < N; i = i + 2){
+            List<TreeNode> left = allPossibleFBT(i);
+            List<TreeNode> right = allPossibleFBT(N - 1 - i);
+            for(TreeNode l: left){
+                for(TreeNode r: right){
+                    TreeNode root = new TreeNode(0);
+                    root.left = l;
+                    root.right = r;
+                    res.add(root);
+                }
+            }
+        }
+        return res;
+    }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
