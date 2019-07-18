@@ -1,4 +1,8 @@
 package Tree.medium;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 //958. Check Completeness of a Binary Tree
 //Given a binary tree, determine if it is a complete binary tree.
 //
@@ -26,4 +30,35 @@ package Tree.medium;
 //
 //The tree will have between 1 and 100 nodes.
 public class CheckCompletenessofaBinaryTree {
+    //层次遍历
+    public boolean isCompleteTree(TreeNode root) {
+        if(root == null)
+            return true;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean flag = false;
+        while(!queue.isEmpty()){
+            int count = queue.size();
+            while(count > 0){
+                TreeNode node = queue.poll();
+                //出现第一个null节点，记录。如果出现null节点后还出现了非Null节点，表示节点不是全部都靠左，返回false
+                if(node == null && !flag)
+                    flag = true;
+                else if(node != null && flag){
+                    return false;
+                }else if(node != null && !flag){
+                    queue.add(node.left);
+                    queue.add(node.right);
+                }
+                count--;
+            }
+        }
+        return true;
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }

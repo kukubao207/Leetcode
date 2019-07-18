@@ -21,4 +21,18 @@ package Tree.medium;
 //Each tree will have at most 100 nodes.
 //Each value in each tree will be a unique integer in the range [0, 99].
 public class FlipEquivalentBinaryTrees {
+    public boolean flipEquiv(TreeNode root1, TreeNode root2) {
+        if(root1 == root2)
+            return true;
+        if(root1 == null || root2 == null || root1.val != root2.val)
+            return false;
+        return flipEquiv(root1.left, root2.left) && flipEquiv(root1.right, root2.right)
+        || flipEquiv(root1.left, root2.right) && flipEquiv(root1.right, root2.left);//选择任意节点交换
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }

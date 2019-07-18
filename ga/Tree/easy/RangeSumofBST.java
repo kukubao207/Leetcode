@@ -21,4 +21,25 @@ package Tree.easy;
 //The number of nodes in the tree is at most 10000.
 //The final answer is guaranteed to be less than 2^31.
 public class RangeSumofBST {
+    public int rangeSumBST(TreeNode root, int L, int R) {
+        inOrder(root, L, R);
+        return sum;
+    }
+    int sum = 0;
+    public void inOrder(TreeNode root, int L, int R) {
+        if(root != null){
+            inOrder(root.left, L, R);
+            if(root.val >= L && root.val <= R)
+                sum += root.val;
+            else if(root.val > R)
+                return;
+            inOrder(root.right, L, R);
+        }
+    }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
