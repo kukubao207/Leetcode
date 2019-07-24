@@ -43,4 +43,25 @@ package Greedy;
 //You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.
 //Therefore, you can't travel around the circuit once no matter where you start.
 public class GasStation {
+    //  车能开完全程需要满足两个条件：
+    //1.车从i站能开到i+1。
+    //2.所有站里的油总量要>=车子的总耗油量。
+    //那么，假设从编号为0站开始，一直到k站都正常，在开往k+1站时车子没油了。这时，应该将起点设置为k+1站。
+    //为什么应该将起始站点设为k+1？
+    //因为k->k+1站耗油太大，0->k站剩余油量都是不为负的，每减少一站，就少了一些剩余油量。
+    // 所以如果从k前面的站点作为起始站，剩余油量不可能冲过k+1站。
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int sum = 0;
+        int left = 0;
+        int start = 0;
+        for(int i = 0;i < gas.length; i++){
+            sum += gas[i] - cost[i];
+            left += gas[i] - cost[i];
+            if(left < 0){
+                start = i + 1;
+                left = 0;
+            }
+        }
+        return sum < 0 ? -1 : start;
+    }
 }

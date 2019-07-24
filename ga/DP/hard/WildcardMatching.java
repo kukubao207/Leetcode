@@ -1,4 +1,4 @@
-package Greedy;
+package DP.hard;
 //44. Wildcard Matching
 //Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*'.
 //
@@ -45,6 +45,7 @@ package Greedy;
 //p = "a*c?b"
 //Output: false
 public class WildcardMatching {
+    //跟第10题类似
     //1.动态规划
     public boolean isMatch(String s, String p) {
         int m = s.length(), n = p.length();
