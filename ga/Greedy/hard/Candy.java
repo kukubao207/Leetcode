@@ -1,4 +1,7 @@
 package Greedy.hard;
+
+import java.util.Arrays;
+
 // 135. Candy
 // There are N children standing in a line. Each child is assigned a rating value.
 //
@@ -20,6 +23,22 @@ package Greedy.hard;
 //Explanation: You can allocate to the first, second and third child with 1, 2, 1 candies respectively.
 //             The third child gets 1 candy because it satisfies the above two conditions.
 public class Candy {
+    //max(left2right[i],right2left[i])
+    public int candy(int[] ratings) {
+        int[] candies = new int[ratings.length];
+        Arrays.fill(candies, 1);
+        for(int i = 1; i < ratings.length; i++){//从左往右遍历，与左邻居比
+            if(ratings[i] > ratings[i - 1])
+                candies[i] = candies[i - 1] + 1;
+        }
+        int sum = candies[ratings.length - 1];
+        for(int i = ratings.length - 2; i >= 0; i--){//从右往左遍历，与右邻居比
+            if(ratings[i] > ratings[i + 1])
+                candies[i] = Math.max(candies[i], candies[i + 1] + 1);
+            sum += candies[i];
+        }
+        return sum;
+    }
 }
 
 //以后我把题做了思路也记录下来，我们可以讨论讨论。
