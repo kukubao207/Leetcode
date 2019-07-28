@@ -45,7 +45,7 @@ public class exam1 {
             i = 0;
             for(int j = B.length - 1; j >= 0; j--)
                 if(B[j] < A[i + 1]){
-                    A[i] = B[j];
+                    A[i] = B[j];    // 这边只考虑了替换左边(i)那个值的情况，你看下case (A:[6 1 8 9 10], B:[7 7 7 7 7])就要去替换右边(i+1)值, 下面代码也有这个问题
                     return A;
                 }
         }

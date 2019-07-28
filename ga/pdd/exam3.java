@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class exam3 {
     public static void main(String[] args) {
-        //按照长度逆序排序
+        //按照长度逆序排序 https://www.cnblogs.com/javahyj/p/5305331.html学习一下Java怎么逆序排序
         //然后输入到函数
     }
 

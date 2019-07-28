@@ -5,6 +5,8 @@ import java.util.Scanner;
 /**
 
  */
+
+// 这个题看下我怎么写的，慢慢来ba.
 public class exam2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
