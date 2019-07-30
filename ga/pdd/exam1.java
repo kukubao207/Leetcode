@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
-
+ 两个数组：数组A和数组B
+ 数组A： 一个几乎严格升序排序的数组（几乎的定义是只需改变其中一个数，即可满足完全升序排序）
+ 从数组B中选择一个最大的数，使得数组A是完全严格升序排列的
  */
 public class exam1 {
     public static void main(String[] args) {
@@ -38,36 +40,45 @@ public class exam1 {
         }
     }
 
-    public static Integer[] sortedArr(Integer[] A, Integer[] B){
+    public static Integer[] sortedArr(Integer[] A, Integer[] B) {
+        //a[i] > a[i+1] 先替换a[i+1]  不行再替换a[i]
+        //a[i] < a[i-1] 先替换a[i]  不行再替换a[i-1]
         int i = 0;
         Arrays.sort(B);
-        if(A[0] > A[1]){
-            i = 0;
-            for(int j = B.length - 1; j >= 0; j--)
-                if(B[j] < A[i + 1]){
+        int condition = 0;
+        for (i = 0; i < A.length; i++) {
+            if (i + 1 < A.length && A[i] > A[i + 1]) {
+                condition = 1;
+                break;
+            }
+            if (i - 1 >= 0 && A[i] < A[i - 1]) {
+                condition = 2;
+                break;
+            }
+        }
+        for (int j = B.length - 1; j >= 0; j--) {
+            if (condition == 1) {
+                if (B[j] > A[i] && ((i + 2 < A.length && B[j] < A[i + 2]) || i + 2 >= A.length)) {
+                    A[i + 1] = B[j];
+                    return A;
+                }
+
+                if (B[j] < A[i + 1]) {
                     A[i] = B[j];    // 这边只考虑了替换左边(i)那个值的情况，你看下case (A:[6 1 8 9 10], B:[7 7 7 7 7])就要去替换右边(i+1)值, 下面代码也有这个问题
                     return A;
                 }
-        }
-        else if(A[A.length - 1] < A[A.length - 2]){
-            i = A.length - 1;
-            for(int j = B.length - 1; j >= 0; j--)
-                if(B[j] > A[i - 1]){
+            }
+            if (condition == 2) {
+                if (B[j] > A[i - 1]) {
                     A[i] = B[j];
                     return A;
                 }
-        }
-        else{
-            for(i = A.length - 2; i >= 1 ; i--)
-                if(!(A[i] < A[i + 1] && A[i] > A[i - 1]))
-                    break;
-            for(int j = B.length - 1; j >= 0; j--)
-                if(B[j] > A[i - 1] && B[j] < A[i + 1]){
-                    A[i] = B[j];
+                if (B[j] < A[i] && ((i - 2 >= 0 && B[j] > A[i - 2]) || i - 2 < 0)) {
+                    A[i - 1] = B[j];
                     return A;
                 }
+            }
         }
         return null;
     }
-
 }

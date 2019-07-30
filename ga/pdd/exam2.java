@@ -1,18 +1,34 @@
 package pdd;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
-
+ 给定一个字符串数组，所有字符均为大写字母，请问给定的字符串数组是否能够通过更换数组中元素的顺序，
+ 从而首尾相连，形成一个环，环上相邻字符串首尾衔接的字符相同
  */
 
 // 这个题看下我怎么写的，慢慢来ba.
 public class exam2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        boolean res = true;
         String s = sc.nextLine();
         String[] str = s.split(" ");
+        List<String> tmp = new ArrayList<>();
+        List<List<String>> res = new ArrayList<>();
+        boolean isTrue = false;
+        dfs(str, tmp, res);
+        for(List list: res){
+            String[] strings = new String[list.size()];
+            list.toArray(strings);
+            isTrue = isTrue || isCircle(strings);
+        }
+        System.out.print(isTrue);
+    }
+
+    public static boolean isCircle(String[] str){
+        boolean res = true;
         int pre_start = str[str.length - 1].charAt(0);
         int pre_end = str[str.length - 1].charAt(str[str.length - 1].length() - 1);
         for(int i = 0; i < str.length; i++){
@@ -31,6 +47,22 @@ public class exam2 {
                 break;
             }
         }
-        System.out.print(res);
+        return res;
+    }
+
+    public static void dfs(String[] str, List<String> tmp, List<List<String>> res) {
+        if(tmp.size() ==  str.length){
+            res.add(new ArrayList<>(tmp));
+            return;
+        }
+        String lastUsed = "";
+        for(int i = 0; i < str.length; i++){
+            if(!tmp.contains(str[i]) && str[i] != lastUsed){
+                tmp.add(str[i]);
+                dfs(str, tmp, res);
+                lastUsed = tmp.get(tmp.size() - 1);
+                tmp.remove(tmp.size() - 1);
+            }
+        }
     }
 }
