@@ -24,21 +24,26 @@ public class exam1 {
     //A：5 9 8 11 15
     //B：1 2 3 4 6 7
     public static void main(String[] args) {
-        List list_A = new ArrayList<Integer>();
-        List list_B = new ArrayList<Integer>();
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-        String[] a = s.split(" ");
-        for(int i = 0; i < a.length; i++)
-            list_A.add(Integer.parseInt(a[i]));
-        String ss = sc.nextLine();
-        String[] b = ss.split(" ");
-        for(int i = 0; i < b.length; i++)
-            list_B.add(Integer.parseInt(b[i]));
-        Integer[] A = new Integer[list_A.size()];
-        list_A.toArray(A);
-        Integer[] B = new Integer[list_B.size()];
-        list_B.toArray(B);
+//        List list_A = new ArrayList<Integer>();
+//        List list_B = new ArrayList<Integer>();
+//        Scanner sc = new Scanner(System.in);
+//        String s = sc.nextLine();
+//        String[] a = s.split(" ");
+//        for(int i = 0; i < a.length; i++)
+//            list_A.add(Integer.parseInt(a[i]));
+//        String ss = sc.nextLine();
+//        String[] b = ss.split(" ");
+//        for(int i = 0; i < b.length; i++)
+//            list_B.add(Integer.parseInt(b[i]));
+//        Integer[] A = new Integer[list_A.size()];
+//        list_A.toArray(A);
+//        Integer[] B = new Integer[list_B.size()];
+//        list_B.toArray(B);
+//        outPut(A, B);
+        test();
+    }
+
+    public static void outPut(Integer[] A, Integer[] B){
         Integer res[] = sortedArr(A, B);
         if(res == null)
             System.out.print("NO");
@@ -92,5 +97,22 @@ public class exam1 {
             }
         }
         return null;
+    }
+    public static void test(){
+        Integer[] A1 = new Integer[]{6, 2, 3, 4, 5};
+        Integer[] B1 = new Integer[]{7, 1, 2, 3, 4};
+        Integer[] A2 = new Integer[]{6, 2, 8, 9, 10, 11};
+        Integer[] B2 = new Integer[]{1, 2, 3, 7, 6, 8};
+        Integer[] A3 = new Integer[]{5, 9, 8, 11, 15};
+        Integer[] B3 = new Integer[]{2, 3, 4, 6, 10, 20};
+        Integer[] A4 = new Integer[]{5, 9, 8, 11, 15};
+        Integer[] B4 = new Integer[]{1, 2, 3, 4, 6, 7};
+        outPut(A1, B1);
+        System.out.println();
+        outPut(A2, B2);
+        System.out.println();
+        outPut(A3, B3);
+        System.out.println();
+        outPut(A4, B4);
     }
 }

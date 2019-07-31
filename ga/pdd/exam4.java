@@ -37,16 +37,22 @@ public class exam4 {
     public static void main(String[] args) {
         //按照长度逆序排序 https://www.cnblogs.com/javahyj/p/5305331.html学习一下Java怎么逆序排序
         //nextInt自动去掉enter键
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] length = new int[n];
-        int[] weight = new int[n];
-        for (int i = 0; i < n; i++)
-            length[i] = sc.nextInt();
-        for (int i = 0; i < n; i++)
-            weight[i] = sc.nextInt();
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int[] length = new int[n];
+//        int[] weight = new int[n];
+//        for (int i = 0; i < n; i++)
+//            length[i] = sc.nextInt();
+//        for (int i = 0; i < n; i++)
+//            weight[i] = sc.nextInt();
+//        sortPair(length, weight, n);//排序
+//        //然后输入到函数
+//        System.out.print(maxHeight(length, weight, new ArrayList<>(), 0, 0));
+        test();
+    }
 
-        //Pair<length,weight> 按照length从大到小排列，length相等的时候按weight从大到小
+    //Pair<length,weight> 按照length从大到小排列，length相等的时候按weight从大到小
+    public static void sortPair(int[] length, int[] weight, int n){
 //        Queue<Pair> queue = new PriorityQueue<Pair>(new Comparator<Pair>() {
 //            @Override
 //            public int compare(Pair o1, Pair o2) {
@@ -58,7 +64,7 @@ public class exam4 {
 //                }
 //            }
 //        });
-        Queue<Pair> queue = new PriorityQueue<Pair>((o1, o2) -> {
+        Queue<Pair> queue = new PriorityQueue<Pair>((o1, o2) -> {//使用箭头，不用Comparator
             if(o1.getKey() == o2.getKey()){
                 return (int)o2.getValue() - (int)o1.getValue();//长度相同的选重量重的（可以放得下的情况下）
             }
@@ -78,13 +84,10 @@ public class exam4 {
         }
 //        System.out.print(Arrays.toString(length));
 //        System.out.print(Arrays.toString(weight));
-        //然后输入到函数
-
-        System.out.print(maxHeight(length, weight, new ArrayList<>(), 0, 0));
     }
 
+
     //int len记录目前最高的积木的长度
-    //在长度相等的时候 选择能满足条件的（重量小于底层积木重量的7倍）重量最大的积木（贪心选择）
     //length数组和weight数组按照长度从大到小排序  在长度一样情况下，按照重量从大到小排序
     public static int maxHeight(int[] length, int[] weight, List<Integer> leftWeight, int start, int len) {
         int n = length.length;
@@ -93,7 +96,7 @@ public class exam4 {
         for (int i = start; i < n; i++) {
             List tmp = leftWeight;
             for (int k = 0; k < leftWeight.size(); k++) {
-                if (weight[i] > leftWeight.get(k) || length[i] == len) {
+                if (weight[i] > leftWeight.get(k) || length[i] == len) { //在长度相等的时候 当上一次选择过了 这一次就不选
                     leftWeight = tmp;
                     return maxHeight(length, weight, leftWeight, start + 1, len);
                 } else {
@@ -111,6 +114,8 @@ public class exam4 {
         return -1;
     }
 
+
+    //一开始写的有问题
     //先按照length排序（从大到小）
     //这里有问题 可能满足条件的情况下，我依旧不选择这块积木
 //    public static int maxHeight(int[] length, int[] weight) {
@@ -144,4 +149,16 @@ public class exam4 {
 //        }
 //        return res;
 //    }
+
+
+
+    public static void test(){
+        int n = 10;
+        //[9, 8, 7, 6, 2, 1, 1, 1, 1, 1][10, 1, 1, 1, 1, 70, 1, 1, 1, 1]6
+        //[9, 8, 7, 6, 2, 1, 1, 1, 1, 1][10, 1, 1, 1, 1, 1, 70, 1, 1, 1]6
+        int[] length = new int[]{9, 9, 7, 6, 2, 1, 1, 1, 1, 1};
+        int[] weight = new int[]{1, 10, 1, 1, 1, 70, 1, 1, 1, 1};
+        sortPair(length, weight, n);
+        System.out.print(maxHeight(length, weight, new ArrayList<>(), 0, 0));
+    }
 }
