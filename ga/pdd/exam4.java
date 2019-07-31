@@ -66,7 +66,7 @@ public class exam4 {
 //        });
         Queue<Pair> queue = new PriorityQueue<Pair>((o1, o2) -> {//使用箭头，不用Comparator
             if(o1.getKey() == o2.getKey()){
-                return (int)o2.getValue() - (int)o1.getValue();//长度相同的选重量重的（可以放得下的情况下）
+                return (int)o2.getValue() - (int)o1.getValue();
             }
             else{
                 return (int)o2.getKey() - (int)o1.getKey();
@@ -88,7 +88,8 @@ public class exam4 {
 
 
     //int len记录目前最高的积木的长度
-    //length数组和weight数组按照长度从大到小排序  在长度一样情况下，按照重量从大到小排序
+    //length数组和weight数组按照长度从大到小排序  在长度一样情况下，按照重量从大到小排序(这里重量正逆排序都可以，只要重量大于剩余重量，有被选和不被选的权利)
+    //关键在于这一次的积木的长度与上一次被选积木的长度不能相等
     public static int maxHeight(int[] length, int[] weight, List<Integer> leftWeight, int start, int len) {
         int n = length.length;
         if (start == n)
