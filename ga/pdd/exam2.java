@@ -8,6 +8,12 @@ import java.util.Scanner;
  给定一个字符串数组，所有字符均为大写字母，请问给定的字符串数组是否能够通过更换数组中元素的顺序，
  从而首尾相连，形成一个环，环上相邻字符串首尾衔接的字符相同
  */
+    // 测试用例：
+    //CAT TIGER RPC
+    //CAT RPC TIGER
+    //TIGER CAT RPC
+    //CAT RPC
+    //TIGER RPC
 
 // 这个题看下我怎么写的，慢慢来ba.
 public class exam2 {

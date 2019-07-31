@@ -11,6 +11,18 @@ import java.util.Scanner;
  从数组B中选择一个最大的数，使得数组A是完全严格升序排列的
  */
 public class exam1 {
+    //测试用例：
+    //A：6 2 3 4 5
+    //B：7 1 2 3 4
+
+    //A：6 2 8 9 10 11
+    //B：1 2 3 7 6 8
+
+    //A：5 9 8 11 15
+    //B：2 3 4 6 10 20
+
+    //A：5 9 8 11 15
+    //B：1 2 3 4 6 7
     public static void main(String[] args) {
         List list_A = new ArrayList<Integer>();
         List list_B = new ArrayList<Integer>();
