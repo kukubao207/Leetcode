@@ -23,6 +23,16 @@ import java.util.*;
     //1 1 1 1 1 2 6 7 8 9
     //1 1 1 1 70 1 1 1 1 10
 
+    //10
+    //2 6 7 8 9 1 1 1 1 1
+    //1 1 1 1 10 70 1 1 1 1
+
+    //[9, 8, 7, 6, 2, 1, 1, 1, 1, 1][10, 1, 1, 1, 1, 70, 1, 1, 1, 1]6
+    //[9, 8, 7, 6, 2, 1, 1, 1, 1, 1][10, 1, 1, 1, 1, 1, 70, 1, 1, 1]6
+
+//        10
+//        9  9 7 6 2   1 1 1 1 1
+//        1 10 1 1 1 70 1 1 1 1
 public class exam4 {
     public static void main(String[] args) {
         //按照长度逆序排序 https://www.cnblogs.com/javahyj/p/5305331.html学习一下Java怎么逆序排序
@@ -48,7 +58,14 @@ public class exam4 {
 //                }
 //            }
 //        });
-        Queue<Pair> queue = new PriorityQueue<Pair>((o1, o2) -> {return (int)o2.getKey() - (int)o1.getKey();});
+        Queue<Pair> queue = new PriorityQueue<Pair>((o1, o2) -> {
+            if(o1.getKey() == o2.getKey()){
+                return (int)o2.getValue() - (int)o1.getValue();//长度相同的选重量重的（可以放得下的情况下）
+            }
+            else{
+                return (int)o2.getKey() - (int)o1.getKey();
+            }
+        });
         for(int i = 0 ; i < n; i++){
             queue.add(new Pair(length[i], weight[i]));
         }
@@ -63,25 +80,33 @@ public class exam4 {
 //        System.out.print(Arrays.toString(weight));
         //然后输入到函数
 
-        System.out.print(maxHeight(length, weight, new ArrayList<>(), 0));
+        System.out.print(maxHeight(length, weight, new ArrayList<>(), 0, 0));
     }
-    public static int maxHeight(int[] length, int[] weight, List<Integer> leftWeight, int start) {
+
+    //int len记录目前最高的积木的长度
+    //在长度相等的时候 选择能满足条件的（重量小于底层积木重量的7倍）重量最大的积木（贪心选择）
+    //length数组和weight数组按照长度从大到小排序  在长度一样情况下，按照重量从大到小排序
+    public static int maxHeight(int[] length, int[] weight, List<Integer> leftWeight, int start, int len) {
         int n = length.length;
         if (start == n)
             return 0;
         for (int i = start; i < n; i++) {
             List tmp = leftWeight;
             for (int k = 0; k < leftWeight.size(); k++) {
-                if (weight[i] > leftWeight.get(k) || (i - 1 >= 0 && length[i] >= length[i - 1])) {
+                if (weight[i] > leftWeight.get(k) || length[i] == len) {
                     leftWeight = tmp;
-                    return maxHeight(length, weight, leftWeight, start + 1);
+                    return maxHeight(length, weight, leftWeight, start + 1, len);
                 } else {
                     leftWeight.set(k, leftWeight.get(k) - weight[i]);
                 }
             }
             leftWeight.add(7 * weight[i]);
-//            System.out.print(leftWeight);
-            return Math.max(1 + maxHeight(length, weight, leftWeight, start + 1), maxHeight(length, weight, tmp, start + 1));
+            int h1 = 1 + maxHeight(length, weight, leftWeight, start + 1, length[i]);
+            int h2 = maxHeight(length, weight, tmp, start + 1, len);
+            if(h1 > h2){
+                return h1;
+            }else
+                return h2;
         }
         return -1;
     }
