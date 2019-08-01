@@ -85,7 +85,7 @@ public class DistinctSubsequences {
         int n = t.length();
         int[][] dp = new int[m + 1][n + 1];
         //初始化dp[i][0] = 1
-        for (int i = 0; i <= m; i++) {
+        for (int i = 0; i <= m; i++) {//空字符串就是把所有的原字符串删掉
             dp[i][0] = 1;
         }
         //dp[0][i] = 0;
