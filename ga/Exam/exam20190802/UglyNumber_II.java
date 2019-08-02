@@ -63,7 +63,7 @@ public class UglyNumber_II {
     }
 
     //2.三指针法  剑指offer好像有
-    //丑数一定会化成2或者3或者5相乘
+    //丑数一定会化成  现有丑数中的数与2或者3或者5相乘
     public int nthUglyNumber1(int n) {
         if(n < 0){
             return 0;
@@ -78,15 +78,21 @@ public class UglyNumber_II {
         while(count < n){
             int next = Math.min(Math.min(result.get(index2) * 2,result.get(index3) * 3),result.get(index5) * 5);
             result.add(next);
-            while(result.get(index2) * 2 <= next){
+//            while(result.get(index2) * 2 <= next){
+//                index2++;
+//            }
+//            while(result.get(index3) * 3 <= next){
+//                index3++;
+//            }
+//            while(result.get(index5) * 5 <= next){
+//                index5++;
+//            }
+            if(next == result.get(index2) * 2)//最小的丑数对应的index才要+1
                 index2++;
-            }
-            while(result.get(index3) * 3 <= next){
+            if(next == result.get(index3) * 3)
                 index3++;
-            }
-            while(result.get(index5) * 5 <= next){
+            if(next == result.get(index5) * 5)
                 index5++;
-            }
             count++;
         }
         return result.get(n - 1);
