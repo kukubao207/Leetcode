@@ -1,4 +1,7 @@
 package Exam.exam20190802;
+
+import java.util.ArrayList;
+
 //264. Ugly Number II
 //Write a program to find the n-th ugly number.
 //
@@ -14,5 +17,80 @@ package Exam.exam20190802;
 //1 is typically treated as an ugly number.
 //n does not exceed 1690.
 public class UglyNumber_II {
+    public static void main(String[] args){
+        test();
+    }
+    //1.超时了  555555555555555555
+    //每个合数都可以写成几个质数（也可称为素数）相乘的形式
+    public static int nthUglyNumber(int n) {
+        if(n == 1)
+            return 1;
+        int times = 0;
+        int i = 0;
+        while(times < n){
+            i++;
+            if(isUglyNumber(i))
+                times++;
+        }
+        return i;
+    }
+
+    public static boolean isUglyNumber(int n){
+        if(n == 1)
+            return true;
+        while(n > 1){
+            if(n % 2 == 0){
+                n = n / 2;
+                continue;
+            }
+            else if(n % 3 == 0){
+                n = n / 3;
+                continue;
+            }
+            else if(n % 5 ==0){
+                n = n / 5;
+                continue;
+            }
+            else
+                return false;
+        }
+        return true;
+    }
+
+    public static void test(){
+        int n = 10;
+        System.out.println(nthUglyNumber(10));
+    }
+
+    //2.三指针法  剑指offer好像有
+    //丑数一定会化成2或者3或者5相乘
+    public int nthUglyNumber1(int n) {
+        if(n < 0){
+            return 0;
+        }
+        if(n == 1){
+            return 1;
+        }
+        ArrayList<Integer> result = new ArrayList<>();//记录丑数数组
+        result.add(1);
+        int index2 = 0,index3 = 0,index5 = 0;//用来标记2、3、5类别中，选到哪一个数2该乘以谁？3该乘以谁？5该乘以谁？
+        int count = 1;//用来记录丑数的个数
+        while(count < n){
+            int next = Math.min(Math.min(result.get(index2) * 2,result.get(index3) * 3),result.get(index5) * 5);
+            result.add(next);
+            while(result.get(index2) * 2 <= next){
+                index2++;
+            }
+            while(result.get(index3) * 3 <= next){
+                index3++;
+            }
+            while(result.get(index5) * 5 <= next){
+                index5++;
+            }
+            count++;
+        }
+        return result.get(n - 1);
+    }
+
 
 }

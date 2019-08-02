@@ -17,4 +17,14 @@ package Exam.exam20190802;
 //Input: 218
 //Output: false
 public class PowerOfTwo {
+    public boolean isPowerOfTwo(int n) {
+       while(n > 0){
+           if(n == 1)
+               return true;
+           else if(n % 2 != 0)
+               return false;
+           n = n / 2;
+       }
+        return false;
+    }
 }

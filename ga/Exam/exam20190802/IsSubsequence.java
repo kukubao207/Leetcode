@@ -22,4 +22,33 @@ package Exam.exam20190802;
 //Credits:
 //Special thanks to @pbrother for adding this problem and creating all test cases.
 public class IsSubsequence {
+    //1.动态规划
+    public boolean isSubsequence(String s, String t) {
+        int m = s.length();
+        int n = t.length();
+        boolean[][] dp = new boolean[m + 1][n + 1];//boolean默认false
+        for(int i = 0; i <= n; i++)
+            dp[0][i] = true;
+        //dp[i][0]默认为false
+        for(int i = 1; i <= m; i++){
+            for(int j = 1; j <= n; j++){
+                if(s.charAt(i - 1) == t.charAt(j - 1))//比较的时候注意index从0开始
+                    dp[i][j] = dp[i - 1][j - 1] || dp[i][j - 1];
+                else
+                    dp[i][j] = dp[i][j - 1];
+            }
+        }
+        return dp[m][n];
+    }
+
+    //2.贪心思路:找到最近的匹配位置,然后从这个位置后面继续找下一个.
+    public boolean isSubsequence1(String s, String t) {
+        int index = -1;
+        for(char c: s.toCharArray()){
+            index = t.indexOf(c, index + 1);//返回此字符串中第一次出现指定字符的索引，从指定的索引开始搜索（包含fromIndex）。没有找到则返回-1。
+            if(index == -1)
+                return false;
+        }
+        return true;
+    }
 }
