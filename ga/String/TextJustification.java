@@ -63,7 +63,10 @@ import java.util.List;
 //Submissions
 //426,812
 public class TextJustification {
-    public List<String> fullJustify(String[] words, int maxWidth) {
+    public static void main(String args[]){
+        test();
+    }
+    public static List<String> fullJustify(String[] words, int maxWidth) {
         List<String> res = new ArrayList<>();
         int index = 0;//记录一行的开始
         while(index < words.length){
@@ -104,9 +107,31 @@ public class TextJustification {
         }
         return res;
     }
-    private String genSpace(int n){
+    private static String genSpace(int n){
         char[] cs = new char[n];
         Arrays.fill(cs, ' ');
         return new String(cs);
     }
+
+        public static void test() {
+        //case 1
+        String[] words = {"This", "is", "an", "example", "of", "text", "justification."};
+        int maxWidth = 16;
+        List<String> output = fullJustify(words, maxWidth);
+        System.out.println(output);
+
+        //case 2
+        String[] words2 = {"What", "must", "be", "acknowledgment", "shall", "be"};
+        int maxWidth2 = 16;
+        List<String> output2 = fullJustify(words2, maxWidth2);
+        System.out.println(output2);
+
+        //case 3
+        String[] words3 = {"Science", "is", "what", "we", "understand", "well", "enough", "to", "explain",
+                "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"};
+        int maxWidth3 = 20;
+        List<String> output3 = fullJustify(words3, maxWidth3);
+        System.out.println(output3);
+    }
+
 }
