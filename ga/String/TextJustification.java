@@ -1,4 +1,9 @@
 package String;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 //68. Text Justification
 //Given an array of words and a width maxWidth, format the text such that each line has exactly maxWidth characters and is fully (left and right) justified.
 //
@@ -58,4 +63,51 @@ package String;
 //Submissions
 //426,812
 public class TextJustification {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> res = new ArrayList<>();
+        int index = 0;//记录一行的开始
+        while(index < words.length){
+            int cur = index;
+            int len = 0;
+            // len + words[cur].length() + cur - index 为单词之间取 一个空格的长度
+            while(cur < words.length && len + words[cur].length() + cur - index <= maxWidth){
+                // 计算纯单词长度
+                len = len + words[cur++].length();
+            }
+            cur--;
+            StringBuilder sb = new StringBuilder();
+            // 区分最后一行
+            if(cur == words.length - 1){
+                for(int i = index; i <= cur; i++){
+                    sb.append(words[i]);
+                    if(i < cur)
+                        sb.append(" ");
+                }
+            }else{
+                int base = cur > index ? (maxWidth - len) / (cur - index) : maxWidth - len;
+                String baseStr = genSpace(base);
+                int left = cur > index ? (maxWidth - len) % (cur - index) : 0;
+                String leftStr = genSpace(base + 1);
+                for(int i = index; i <= cur; i++){
+                    sb.append(words[i]);
+                    if(i < cur){
+                        sb.append(left > 0 ? leftStr : baseStr);
+                        left--;
+                    }
+                }
+            }
+            if(sb.length() < maxWidth){//最后一行填充不够用空格填充
+                sb.append(genSpace(maxWidth - sb.length()));
+            }
+            res.add(sb.toString());
+            index = cur + 1;
+        }
+        return res;
+    }
+    private String genSpace(int n){
+        char[] cs = new char[n];
+        Arrays.fill(cs, ' ');
+        return new String(cs);
+    }
+
 }
