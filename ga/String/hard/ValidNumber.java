@@ -1,4 +1,4 @@
-package String;
+package String.hard;
 
 import java.util.ArrayList;
 

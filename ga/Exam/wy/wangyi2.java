@@ -1,4 +1,4 @@
-package wy;
+package Exam.wy;
 
 import java.util.Arrays;
 import java.util.Scanner;

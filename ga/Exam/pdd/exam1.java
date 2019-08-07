@@ -1,9 +1,6 @@
-package pdd;
+package Exam.pdd;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  两个数组：数组A和数组B

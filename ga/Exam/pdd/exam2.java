@@ -1,8 +1,7 @@
-package pdd;
+package Exam.pdd;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  给定一个字符串数组，所有字符均为大写字母，请问给定的字符串数组是否能够通过更换数组中元素的顺序，

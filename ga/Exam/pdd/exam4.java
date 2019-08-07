@@ -1,4 +1,4 @@
-package pdd;
+package Exam.pdd;
 
 import javafx.util.Pair;
 
