@@ -109,5 +109,4 @@ public class TextJustification {
         Arrays.fill(cs, ' ');
         return new String(cs);
     }
-
 }
