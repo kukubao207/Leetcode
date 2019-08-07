@@ -62,107 +62,107 @@ import java.util.List;
 //Submissions
 //426,812
 public class TextJustification {
-    public static void main(String[] args) {
-        test();
-    }
-
-    public static void test() {
-        //case 1
-        String[] words = {"This", "is", "an", "example", "of", "text", "justification."};
-        int maxWidth = 16;
-        List<String> output = fullJustify(words, maxWidth);
-        System.out.println(output);
-
-        //case 2
-        String[] words2 = {"What", "must", "be", "acknowledgment", "shall", "be"};
-        int maxWidth2 = 16;
-        List<String> output2 = fullJustify(words2, maxWidth2);
-        System.out.println(output2);
-
-        //case 3
-        String[] words3 = {"Science", "is", "what", "we", "understand", "well", "enough", "to", "explain",
-                "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"};
-        int maxWidth3 = 20;
-        List<String> output3 = fullJustify(words3, maxWidth3);
-        System.out.println(output3);
-    }
-
-    public static class Record {
-        int endIdx;
-        int numOfInterval;
-        int numOfSpace;
-
-        Record(int e, int n1, int n2) {
-            endIdx = e;
-            numOfInterval = n1;
-            numOfSpace = n2;
-        }
-    }
-
-    public static List<String> fullJustify(String[] words, int maxWidth) {
-        List<Record> records = new ArrayList<>();       // 一个Record对应一行输出
-        int curSum = 0, numOfInterval = 0;              // curSum统计当前累计的单词长度和，numOfInterval表示当前单词之间至少需要的空格总数
-        for (int i = 0; i < words.length; i++) {
-            if (curSum + words[i].length() + numOfInterval > maxWidth) {
-                records.add(new Record(i - 1, numOfInterval - 1, maxWidth - curSum));
-                numOfInterval = 0;
-                curSum = 0;
-            }
-            curSum += words[i].length();
-            numOfInterval++;
-        }
-
-        List<String> res = new ArrayList<>();
-        int start = 0;
-        for (Record r : records) {
-            String temp = "";
-            List<String> space = ComputeSpace(r);   //计算该行单词之间的空格应该如何存放 需要注意  只有一个单词的特殊情况
-            int space_idx = 0;
-            while (space_idx < space.size()) {
-                temp += words[start];
-                temp += space.get(space_idx);
-                start++;
-                space_idx++;
-            }
-            if (start <= r.endIdx) {
-                temp += words[start];
-                start++;
-            }
-            res.add(temp);
-        }
-        String temp = "";
-
-        records.add(new Record(words.length - 1, numOfInterval - 1, maxWidth - curSum));
-        while (start <= records.get(records.size() - 1).endIdx) {
-            temp += words[start];
-            if (temp.length() < maxWidth)
-                temp += " ";
-            start++;
-        }
-        while (temp.length() < maxWidth)
-            temp += " ";
-        res.add(temp);
-        return res;
-    }
-
-    public static List<String> ComputeSpace(Record r) {
-        List<String> space = new ArrayList<>();
-        if (r.numOfInterval == 0) {
-            String temp = "";
-            for (int j = 0; j < r.numOfSpace; j++)
-                temp += " ";
-            space.add(temp);
-            return space;
-        }
-        int everyone = r.numOfSpace / r.numOfInterval;
-        int addToLeft = r.numOfSpace % r.numOfInterval;
-        for (int i = 0; i < r.numOfInterval; i++) {
-            String temp = i + 1 <= addToLeft ? " " : "";
-            for (int j = 0; j < everyone; j++) {
-                temp += " ";
-            }
-            space.add(temp);
-        }
-        return space;
-    }
+//    public static void main(String[] args) {
+//        test();
+//    }
+//
+//    public static void test() {
+//        //case 1
+//        String[] words = {"This", "is", "an", "example", "of", "text", "justification."};
+//        int maxWidth = 16;
+//        List<String> output = fullJustify(words, maxWidth);
+//        System.out.println(output);
+//
+//        //case 2
+//        String[] words2 = {"What", "must", "be", "acknowledgment", "shall", "be"};
+//        int maxWidth2 = 16;
+//        List<String> output2 = fullJustify(words2, maxWidth2);
+//        System.out.println(output2);
+//
+//        //case 3
+//        String[] words3 = {"Science", "is", "what", "we", "understand", "well", "enough", "to", "explain",
+//                "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"};
+//        int maxWidth3 = 20;
+//        List<String> output3 = fullJustify(words3, maxWidth3);
+//        System.out.println(output3);
+//    }
+//
+//    public static class Record {
+//        int endIdx;
+//        int numOfInterval;
+//        int numOfSpace;
+//
+//        Record(int e, int n1, int n2) {
+//            endIdx = e;
+//            numOfInterval = n1;
+//            numOfSpace = n2;
+//        }
+//    }
+//
+//    public static List<String> fullJustify(String[] words, int maxWidth) {
+//        List<Record> records = new ArrayList<>();       // 一个Record对应一行输出
+//        int curSum = 0, numOfInterval = 0;              // curSum统计当前累计的单词长度和，numOfInterval表示当前单词之间至少需要的空格总数
+//        for (int i = 0; i < words.length; i++) {
+//            if (curSum + words[i].length() + numOfInterval > maxWidth) {
+//                records.add(new Record(i - 1, numOfInterval - 1, maxWidth - curSum));
+//                numOfInterval = 0;
+//                curSum = 0;
+//            }
+//            curSum += words[i].length();
+//            numOfInterval++;
+//        }
+//
+//        List<String> res = new ArrayList<>();
+//        int start = 0;
+//        for (Record r : records) {
+//            String temp = "";
+//            List<String> space = ComputeSpace(r);   //计算该行单词之间的空格应该如何存放 需要注意  只有一个单词的特殊情况
+//            int space_idx = 0;
+//            while (space_idx < space.size()) {
+//                temp += words[start];
+//                temp += space.get(space_idx);
+//                start++;
+//                space_idx++;
+//            }
+//            if (start <= r.endIdx) {
+//                temp += words[start];
+//                start++;
+//            }
+//            res.add(temp);
+//        }
+//        String temp = "";
+//
+//        records.add(new Record(words.length - 1, numOfInterval - 1, maxWidth - curSum));
+//        while (start <= records.get(records.size() - 1).endIdx) {
+//            temp += words[start];
+//            if (temp.length() < maxWidth)
+//                temp += " ";
+//            start++;
+//        }
+//        while (temp.length() < maxWidth)
+//            temp += " ";
+//        res.add(temp);
+//        return res;
+//    }
+//
+//    public static List<String> ComputeSpace(Record r) {
+//        List<String> space = new ArrayList<>();
+//        if (r.numOfInterval == 0) {
+//            String temp = "";
+//            for (int j = 0; j < r.numOfSpace; j++)
+//                temp += " ";
+//            space.add(temp);
+//            return space;
+//        }
+//        int everyone = r.numOfSpace / r.numOfInterval;
+//        int addToLeft = r.numOfSpace % r.numOfInterval;
+//        for (int i = 0; i < r.numOfInterval; i++) {
+//            String temp = i + 1 <= addToLeft ? " " : "";
+//            for (int j = 0; j < everyone; j++) {
+//                temp += " ";
+//            }
+//            space.add(temp);
+//        }
+//        return space;
+//    }
 }
