@@ -1,4 +1,4 @@
-package String.medium;
+package Stack.medium;
 
 import java.util.Stack;
 
