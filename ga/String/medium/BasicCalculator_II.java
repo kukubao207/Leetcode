@@ -1,6 +1,5 @@
 package String.medium;
 
-import java.util.HashMap;
 import java.util.Stack;
 
 //227. Basic Calculator II
@@ -25,7 +24,7 @@ import java.util.Stack;
 //You may assume that the given expression is always valid.
 //Do not use the eval built-in library function.
 public class BasicCalculator_II {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         test();
     }
     //1.只能计算个位数 哭了
@@ -230,6 +229,5 @@ public class BasicCalculator_II {
         else if(sign == '/')
             number.push(num1 / num2);
     }
-
 
 }
