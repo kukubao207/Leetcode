@@ -1,4 +1,8 @@
 package Stack.easy;
+
+import java.util.HashMap;
+import java.util.Map;
+
 //496. Next Greater Element I
 //You are given two arrays (without duplicates) nums1 and nums2 where nums1’s elements are subset of nums2. Find all the next greater numbers for nums1's elements in the corresponding places of nums2.
 //
@@ -21,4 +25,26 @@ package Stack.easy;
 //All elements in nums1 and nums2 are unique.
 //The length of both nums1 and nums2 would not exceed 1000.
 public class NextGreaterElement_I {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int n = nums1.length;
+        int m = nums2.length;
+        int[] res = new int[n];
+        int j;
+        for(int i = 0; i < m; i++){
+           for(j = i + 1; j < m; j++){
+               if(nums2[j] > nums2[i]){
+                   map.put(nums2[i], nums2[j]);
+                   break;
+               }
+            }
+            if(j == m)
+                map.put(nums2[i], -1);
+        }
+
+        for(int i = 0; i < n; i++){
+            res[i] = map.get(nums1[i]);
+        }
+        return res;
+    }
 }
