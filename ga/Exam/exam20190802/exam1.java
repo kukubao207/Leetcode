@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * C
+ * 给出两个在m进制下含有n位的数字，你可以分别将这两个数各位上的数字重新排列，然后将这两个数对应相加并分别对m取模，这样显然可以得到一个新的m进制下的n位数（可能存在前导0）
+ * 但是这个结果是不唯一的，问题来了， 这样的操作，能够得到的最大的m进制下的数字是多少?
  */
 public class exam1 {
     public static void main(String[] args){
