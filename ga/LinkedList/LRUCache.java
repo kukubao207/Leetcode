@@ -1,4 +1,10 @@
 package LinkedList;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 // 146. LRU Cache
 //Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and put.
 //
@@ -24,5 +30,45 @@ package LinkedList;
 //cache.get(3);       // returns 3
 //cache.get(4);       // returns 4
 public class LRUCache {
+    //LinkedHashMap  HashMap + LinkedList 即它既使用HashMap操作数据结构，又使用LinkedList维护插入元素的先后顺序
+    //使用LinkedHashMap，保持插入顺序
+    //一旦被某个entry被get或者put过，就将它放在队尾
+    //这样写   LinkedHashMap自己会扩容
+//    private LinkedHashMap<Integer, Integer> linkedHashMap;
+//    public LRUCache(int capacity) {
+//        linkedHashMap = new LinkedHashMap(capacity, 1, true);
+//    }
+//    public int get(int key) {
+//        return linkedHashMap.getOrDefault(key, -1);
+//    }
+//    public void put(int key, int value) {
+//        linkedHashMap.put(key, value);
+//    }
+
+    private int capacity;
+    private Map<Integer, Integer> map = new LinkedHashMap<>();  // 保持插入顺序
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+    }
+    public int get(int key) {
+        if (map.keySet().contains(key)) {
+            int value = map.get(key);
+            map.remove(key);//先删除
+            //保证每次查询后，都在末尾
+            map.put(key, value);
+            return value;
+        }
+        return -1;
+    }
+    public void put(int key, int value) {
+        if (map.keySet().contains(key)) {
+            map.remove(key);
+        }else if(map.size() >= capacity){
+            Iterator<Map.Entry<Integer, Integer>> iterator = map.entrySet().iterator();
+            iterator.next();
+            iterator.remove();//把最开头的entry删除（最近最少使用）
+        }
+        map.put(key, value);
+    }
 
 }

@@ -9,11 +9,41 @@ public class test1 {
     public static void test() {
         int[] a = {1, 3, 6};
         int[] b = {2, 7};
-        System.out.println(num(a, b, 6));
-        System.out.println(num(a, b, 8));
-        System.out.println(num(a, b, 10));
-        System.out.println(num(a, b, 15));
+        System.out.println(num1(a, b, 6));
+        System.out.println(num1(a, b, 8));
+        System.out.println(num1(a, b, 10));
+        System.out.println(num1(a, b, 15));
     }
+    // O(n) 解法
+    public static int num1(int[] a, int b[], int k) {
+        int[] c = new int[b.length];
+        int bIdx = 0;
+        for(bIdx = 0; bIdx < b.length; bIdx++){
+            if(b[bIdx] >= k)
+                break;
+            c[bIdx] = k - b[bIdx];//从大到小
+        }
+        bIdx--;
+        int aIdx = 0;
+        int res = 0;
+        while(bIdx >= 0 && aIdx < a.length){
+            while(aIdx < a.length && a[aIdx] <= c[bIdx]){
+                aIdx++;
+            }
+            if(aIdx == a.length){
+                while(bIdx >= 0){
+                    res += aIdx;
+                    bIdx--;
+                }
+                return res;
+            }
+            res += aIdx;
+            bIdx--;
+        }
+        return res;
+    }
+
+
 
     // O(n) 解法
     public static int num(int[] a, int b[], int k) {

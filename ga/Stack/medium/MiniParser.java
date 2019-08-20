@@ -31,7 +31,6 @@ import java.util.Stack;
 //         a. An integer containing value 789.
 public class MiniParser {
     //1.用栈
-    //这个题目每个list里面只会有一个整数
 //    public NestedInteger deserialize(String s) {
 //        if(s.isEmpty()) return new NestedInteger();
 //        if(s.charAt(0) != '[')  return new NestedInteger(Integer.parseInt(s));
