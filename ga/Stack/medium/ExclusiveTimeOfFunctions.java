@@ -1,4 +1,7 @@
 package Stack.medium;
+
+import java.util.*;
+
 //636. Exclusive Time of Functions
 //On a single threaded CPU, we execute some functions.  Each function has a unique id between 0 and N-1.
 //
@@ -35,4 +38,95 @@ package Stack.medium;
 //Two functions won't start or end at the same time.
 //Functions will always log when they exit.
 public class ExclusiveTimeOfFunctions {
+    public static void main(String[] args){test();}
+    public static int[] exclusiveTime(int n, List<String> logs) {
+        //写的乱七八糟 die了
+//        Map<Integer, Integer> map = new HashMap();
+//        Stack<String[]> stack = new Stack<>();
+//        int v = 0;
+//        int[] res = new int[n];
+//        for(int i = 0; i < logs.size(); i++){
+//            String[] strings = logs.get(i).split(":");
+//            if(!stack.isEmpty() && stack.peek()[0].equals(strings[0]) && stack.peek()[1].equals("start") && strings[1].equals("end")){
+//                String tmp[] = stack.pop();
+//                if(stack.isEmpty()) {
+//                    map.put(Integer.parseInt(strings[0]), map.getOrDefault(Integer.parseInt(strings[0]), 0) + Integer.parseInt(strings[2]) - Integer.parseInt(tmp[2]) + 1 - v);
+//                    v = 0;
+//                }else{
+//                    map.put(Integer.parseInt(strings[0]), map.getOrDefault(Integer.parseInt(strings[0]), 0) + Integer.parseInt(strings[2]) - Integer.parseInt(tmp[2]) + 1);
+//                    v += Integer.parseInt(strings[2]) - Integer.parseInt(tmp[2]) + 1;
+//                }
+//            }else{
+//                stack.push(strings);
+//            }
+//            System.out.println(map);
+//        }
+//        Iterator<Map.Entry<Integer, Integer>> iterator = map.entrySet().iterator();
+//        while(iterator.hasNext()){
+//            Map.Entry<Integer, Integer> next = iterator.next();
+//            res[next.getKey()] = next.getValue();
+//        }
+//        return res;
+        int[] results = new int[n];
+        Stack<String[]> stack = new Stack<>();
+        for (String s : logs) {
+            String[] str = s.split(":");
+            if (str[1].equals("start")) {
+                stack.push(new String[]{str[0], str[2], str[2]});//index_1:放修改的， index_2：放未修改的
+            } else {
+                String[] pop = stack.pop();
+                int value = Integer.parseInt(str[2]) - Integer.parseInt(pop[1]) + 1;
+                results[Integer.parseInt(pop[0])] += value;
+                if (stack.size() > 0) {
+                    String[] p = stack.pop();
+                    p[1] = Integer.parseInt(p[1]) + Integer.parseInt(str[2]) - Integer.parseInt(pop[2]) + 1 + "";
+                    stack.push(p);
+                }
+            }
+        }
+        return results;
+    }
+    public static void test(){
+        int n = 8;
+        List<String> logs = new ArrayList<>();
+        logs.add("0:start:0");
+        logs.add("1:start:5");
+        logs.add("2:start:6");
+        logs.add("3:start:9");
+        logs.add("4:start:11");
+        logs.add("5:start:12");
+        logs.add("6:start:14");
+        logs.add("7:start:15");
+        logs.add("1:start:24");
+        logs.add("1:end:29");
+        logs.add("7:end:34");
+        logs.add("6:end:37");
+        logs.add("5:end:39");
+        logs.add("4:end:40");
+        logs.add("3:end:45");
+        logs.add("0:start:49");
+        logs.add("0:end:54");
+        logs.add("5:start:55");
+        logs.add("5:end:59");
+        logs.add("4:start:63");
+        logs.add("4:end:66");
+        logs.add("2:start:69");
+        logs.add("2:end:70");
+        logs.add("2:start:74");
+        logs.add("6:start:78");
+        logs.add("0:start:79");
+        logs.add("0:end:80");
+        logs.add("6:end:85");
+        logs.add("1:start:89");
+        logs.add("1:end:93");
+        logs.add("2:end:96");
+        logs.add("2:end:100");
+        logs.add("1:end:102");
+        logs.add("2:start:105");
+        logs.add("2:end:109");
+        logs.add("0:end:114");
+        int[] res = exclusiveTime(n, logs);
+        for(int i : res)
+            System.out.print(i + " ");
+    }
 }
