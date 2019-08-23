@@ -42,4 +42,58 @@ package Math.easy;
 //Output: 1994
 //Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 public class RomantoInteger {
+    public static void main(String[] args){test();}
+    public static int romanToInt(String s) {
+        int res = 0;
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == 'I' && i + 1 < s.length() && s.charAt(i + 1) == 'V'){
+                i++;
+                res += 4;
+            }else if(s.charAt(i) == 'I' && i + 1 < s.length() && s.charAt(i + 1) == 'X'){
+                i++;
+                res += 9;
+            }else if(s.charAt(i) == 'X' && i + 1 < s.length() && s.charAt(i + 1) == 'L'){
+                i++;
+                res += 40;
+            }else if(s.charAt(i) == 'X' && i + 1 < s.length() && s.charAt(i + 1) == 'C'){
+                i++;
+                res += 90;
+            }else if(s.charAt(i) == 'C' && i + 1 < s.length() && s.charAt(i + 1) == 'D'){
+                i++;
+                res += 400;
+            }else if(s.charAt(i) == 'C' && i + 1 < s.length() && s.charAt(i + 1) == 'M'){
+                i++;
+                res += 900;
+            }else{
+                switch (s.charAt(i)){
+                    case 'I':
+                        res += 1;
+                        break;
+                    case 'V':
+                        res += 5;
+                        break;
+                    case 'X':
+                        res += 10;
+                        break;
+                    case 'L':
+                        res += 50;
+                        break;
+                    case 'C':
+                        res += 100;
+                        break;
+                    case 'D':
+                        res += 500;
+                        break;
+                    case 'M':
+                        res += 1000;
+                        break;
+                }
+            }
+        }
+        return res;
+    }
+    public static void test(){
+        String s = "III";
+        System.out.print(romanToInt(s));
+    }
 }

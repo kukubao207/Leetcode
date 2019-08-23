@@ -42,4 +42,28 @@ package Math.medium;
 //Explanation: The number "-91283472332" is out of the range of a 32-bit signed integer.
 //             Thefore INT_MIN (−231) is returned.
 public class StringtoInteger {
+    //+ 0 123 //输出0 因为+后面是空格
+    //当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合起来，作为该整数的正负号(**连续)
+    public int myAtoi(String str) {
+        long res = 0;
+        if(str.equals(null) || str.length() == 0)
+            return 0;
+        str = str.trim();
+        if(str.equals(""))
+            return 0;
+        int i = 0;
+        int sign = 1;//是否为负数
+        if(str.charAt(i) == '-'){
+            i++;
+            sign = -1;
+        }else if(str.charAt(i) == '+')
+            i++;
+        while(i < str.length() && Character.isDigit(str.charAt(i))){
+            res = res * 10 + str.charAt(i) - '0';
+            if (sign == 1 && res > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+            if (sign == -1 && res > Integer.MAX_VALUE) return Integer.MIN_VALUE;
+            i++;
+        }
+        return (int) res * sign;
+    }
 }
