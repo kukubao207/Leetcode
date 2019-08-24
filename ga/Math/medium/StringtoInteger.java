@@ -66,4 +66,55 @@ public class StringtoInteger {
         }
         return (int) res * sign;
     }
+
+    public static int myAtoi1(String s) {
+        int result = 0;
+        boolean negative = false;
+        int digit;
+        s = s.trim();
+        int i = 0, len = s.length();
+        int limit = -Integer.MAX_VALUE;
+        if (len > 0) {
+            char firstChar = s.charAt(0);
+            if (firstChar < '0') {
+                if (firstChar == '-') {
+                    negative = true;
+                    limit = Integer.MIN_VALUE;
+                } else if (firstChar != '+')
+                    return 0;
+                if (len == 1) // Cannot have lone "+" or "-"
+                    return 0;
+                i++;
+            }
+            while(i < s.length() && Character.isDigit(s.charAt(i))){
+                digit = Character.digit(s.charAt(i++), 10);
+                if(result < limit / 10)
+                    return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+                result *= 10;
+                if(result - digit < limit)
+                    return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+                result -= digit;
+            }
+        }
+        return negative ? result : -result;
+    }
+    public static void main(String[] args){
+//        System.out.print(Integer.parseInt("15a", 10));
+//        Integer.parseInt("1");
+        test();
+    }
+    public static void test(){
+        String s = "-91283472332";
+        System.out.println(myAtoi1(s));
+        String s1 = "words and 987";
+        String s2 = "   -42";
+        String s3 = "42";
+        String s4 = String.valueOf(Integer.MIN_VALUE);
+        String s5 = String.valueOf(Integer.MAX_VALUE);
+        System.out.println(myAtoi1(s1));
+        System.out.println(myAtoi1(s2));
+        System.out.println(myAtoi1(s3));
+        System.out.println(myAtoi1(s4));
+        System.out.println(myAtoi1(s5));
+    }
 }
