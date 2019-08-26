@@ -1,5 +1,4 @@
 package Math.medium;
-
 //8. String to Integer (atoi)
 //Implement atoi which converts a string to an integer.
 //
@@ -47,19 +46,19 @@ public class StringtoInteger {
     //当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合起来，作为该整数的正负号(**连续)
     public int myAtoi(String str) {
         long res = 0;
-        if (str.equals(null) || str.length() == 0)
+        if(str.equals(null) || str.length() == 0)
             return 0;
         str = str.trim();
-        if (str.equals(""))
+        if(str.equals(""))
             return 0;
         int i = 0;
         int sign = 1;//是否为负数
-        if (str.charAt(i) == '-') {
+        if(str.charAt(i) == '-'){
             i++;
             sign = -1;
-        } else if (str.charAt(i) == '+')
+        }else if(str.charAt(i) == '+')
             i++;
-        while (i < str.length() && Character.isDigit(str.charAt(i))) {
+        while(i < str.length() && Character.isDigit(str.charAt(i))){
             res = res * 10 + str.charAt(i) - '0';
             if (sign == 1 && res > Integer.MAX_VALUE) return Integer.MAX_VALUE;
             if (sign == -1 && res > Integer.MAX_VALUE) return Integer.MIN_VALUE;
@@ -87,28 +86,24 @@ public class StringtoInteger {
                     return 0;
                 i++;
             }
-            while (i < s.length() && Character.isDigit(s.charAt(i))) {
+            while(i < s.length() && Character.isDigit(s.charAt(i))){
                 digit = Character.digit(s.charAt(i++), 10);
-                if (result < limit / 10)
+                if(result < limit / 10)
                     return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
                 result *= 10;
-//                if(result - digit < limit)
-//                    return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-                if (result < limit + digit)
+                if(result - digit < limit)
                     return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
                 result -= digit;
             }
         }
         return negative ? result : -result;
     }
-
-    public static void main(String[] args) {
+    public static void main(String[] args){
 //        System.out.print(Integer.parseInt("15a", 10));
 //        Integer.parseInt("1");
         test();
     }
-
-    public static void test() {
+    public static void test(){
         String s = "-91283472332";
         System.out.println(myAtoi1(s));
         String s1 = "words and 987";
