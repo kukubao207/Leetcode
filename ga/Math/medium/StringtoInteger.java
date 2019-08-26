@@ -91,9 +91,7 @@ public class StringtoInteger {
                 if(result < limit / 10)
                     return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
                 result *= 10;
-//                if(result - digit < limit)//liangge
-//                    return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-                if(result < limit + digit)
+                if(result - digit < limit)
                     return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
                 result -= digit;
             }
@@ -106,19 +104,17 @@ public class StringtoInteger {
         test();
     }
     public static void test(){
-//        String s = "-91283472332";
-//        System.out.println(myAtoi1(s));
-//        String s1 = "words and 987";
-//        String s2 = "   -42";
-//        String s3 = "42";
-//        String s4 = String.valueOf(Integer.MIN_VALUE);
-//        String s5 = String.valueOf(Integer.MAX_VALUE);
-        String s6 = "-2147483649";
-//        System.out.println(myAtoi1(s1));
-//        System.out.println(myAtoi1(s2));
-//        System.out.println(myAtoi1(s3));
-//        System.out.println(myAtoi1(s4));
-//        System.out.println(myAtoi1(s5));
-        System.out.println(myAtoi1(s6));
+        String s = "-91283472332";
+        System.out.println(myAtoi1(s));
+        String s1 = "words and 987";
+        String s2 = "   -42";
+        String s3 = "42";
+        String s4 = String.valueOf(Integer.MIN_VALUE);
+        String s5 = String.valueOf(Integer.MAX_VALUE);
+        System.out.println(myAtoi1(s1));
+        System.out.println(myAtoi1(s2));
+        System.out.println(myAtoi1(s3));
+        System.out.println(myAtoi1(s4));
+        System.out.println(myAtoi1(s5));
     }
 }
