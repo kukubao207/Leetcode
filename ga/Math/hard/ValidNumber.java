@@ -29,4 +29,40 @@ package Math.hard;
 //Update (2015-02-10):
 //The signature of the C++ function had been updated. If you still see your function signature accepts a const char * argument, please click the reload button to reset your code definition.
 public class ValidNumber {
+    public static boolean isNumber(String s) {
+        s = s.trim();
+        int state = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int input = index(s.charAt(i));
+            if (input == -1)
+                return false;
+            state = state_transfer_matrix[state][input];
+            if (state == -1)
+                return false;
+        }
+        return state == 1 || state == 3 || state == 4 || state == 7;
+    }
+    // 状态机
+    public static int[][] state_transfer_matrix = {
+            {-1, 5, 2, 1},
+            {6, 3, -1, 1},
+            {-1, 5, -1, 1},
+            {6, -1, -1, 4},
+            {6, -1, -1, 4},
+            {-1, -1, -1, 4},
+            {-1, -1, 8, 7},
+            {-1, -1, -1, 7},
+            {-1, -1, -1, 7}};
+    public static int index(char input) {
+        if (input == 'e')
+            return 0;
+        else if (input == '.')
+            return 1;
+        else if (input == '+' || input == '-')
+            return 2;
+        else if (Character.isDigit(input))
+            return 3;
+        else
+            return -1;
+    }
 }

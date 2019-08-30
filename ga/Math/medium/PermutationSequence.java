@@ -25,4 +25,5 @@ package Math.medium;
 //Input: n = 4, k = 9
 //Output: "2314"
 public class PermutationSequence {
+
 }
