@@ -47,6 +47,8 @@ public class LRUCache {
     public void deleteNode(Node node){
         node.next.prev=node.prev;
         node.prev.next=node.next;
+//        node.prev = null;
+//        node.next = null;//方便回收
     }
     Map<Integer, Node> map;
     Node head = new Node(0, 0);
