@@ -5,39 +5,45 @@ import java.util.*;
 public class tx3 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String str = sc.next();
-        String res = decodeString(str);
-        System.out.println(new StringBuilder(res).reverse().toString());
-    }
-
-    public static String decodeString(String s) {
-        Stack<Integer> count = new Stack<>();
-        Stack<String> result = new Stack<>();
-        int idx = 0;
-        result.push("");
-        while (idx < s.length()) {
-            char ch = s.charAt(idx);
-            if (ch >= '0' && ch <= '9') {
-                int start = idx;
-                while (s.charAt(idx + 1) >= '0' && s.charAt(idx + 1) <= '9')
-                    idx++;
-                count.push(Integer.parseInt(s.substring(start, idx + 1)));
-            } else if (ch == '[' || ch == '{' || ch == '(') {
-                result.push("");
-            } else if (ch == ']' || ch == '}' || ch == ')') {
-                String str = result.pop();
-                StringBuilder sb = new StringBuilder();
-                int times = count.pop();
-                for (int j = 0; j < times; j += 1) {
-                    sb.append(str);
-                }
-                result.push(result.pop() + sb.toString());
-            } else {
-                result.push(result.pop() + ch);
+        int n = sc.nextInt();
+        int[][] a = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                a[i][j] = sc.nextInt();
             }
-            idx += 1;
         }
-        return result.pop();
+        int[][] dp = new int[n][n];
+        dp[0][0] = 0;
+        for (int i = 1; i < n; i++) {
+            if (a[0][i] == 1)
+                dp[0][i] = dp[0][i - 1] + 1;
+            else
+                dp[0][i] = dp[0][i - 1];
+        }
+        for (int i = 1; i < n; i++) {
+            if (a[i][0] == 1)
+                dp[i][0] = dp[i - 1][0] + 1;
+            else
+                dp[i][0] = dp[i - 1][0];
+        }
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < n; j++) {
+                if (a[i][j] == 1)
+                    dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + 1;
+                else
+                    dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+        for (int i = 1; i < n - 1; i++) {
+
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(dp[i][j] + ",");
+            }
+            System.out.println();
+        }
+        System.out.println(dp[n - 1][n - 1]);
     }
 
 }
