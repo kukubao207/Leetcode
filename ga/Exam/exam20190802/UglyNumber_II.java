@@ -20,7 +20,7 @@ public class UglyNumber_II {
     public static void main(String[] args){
         test();
     }
-    //1.超时了  555555555555555555
+    //1.超时了  555555555555555555 ????????
     //每个合数都可以写成几个质数（也可称为素数）相乘的形式
     public static int nthUglyNumber(int n) {
         if(n == 1)
