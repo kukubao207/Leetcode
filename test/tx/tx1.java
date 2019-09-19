@@ -5,27 +5,39 @@ import java.util.*;
 public class tx1 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        String[] in = str.split(" ");
-        ArrayList<String> res = new ArrayList<>();
-        for (int i = 1; i < in.length; i++) {
-            int start = 0;
-            while (in[i].length() != 0) {
-                String temp = in[i].substring(start, Math.min(in[i].length(), start + 8));
-                res.add(temp);
-                in[i] = in[i].substring(Math.min(start + 8, in[i].length()));
-            }
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int a[] = new int[n];
+        int w[] = new int[n];
+        for (int i = 0; i < n; i++)
+            a[i] = sc.nextInt();
+        for (int i = 0; i < n; i++)
+            w[i] = sc.nextInt();
+        int sum = 0;
+        for (int weight : w) {
+            sum += weight;
         }
-        Collections.sort(res);
-        List<String> resres = new ArrayList<>();
-        for(String s:res){
-            StringBuilder sb = new StringBuilder(s);
-            while(sb.length()<8){
-                sb.append("0");
-            }
-            resres.add(sb.toString());
+        double p[] = new double[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = w[i] / (double)sum;
         }
-        System.out.println(resres);
+        int fromZeroRemain = lastRemain(n, m);
+        double res = 0;
+        for (int i = 0; i < n; i++) {
+            int idx = (fromZeroRemain + i) % n;
+//            System.out.println(i + "," + idx);
+            if (a[idx] == 1)
+                res += p[i];
+        }
+        System.out.println(String.format("%.5f", res));
     }
 
+    public static int lastRemain(int n, int m) {
+        if (n < 1 || m < 1)
+            return -1;
+        int last = 0;
+        for (int i = 2; i <= n; i++)
+            last = (last + m) % i;
+        return last;
+    }
 }

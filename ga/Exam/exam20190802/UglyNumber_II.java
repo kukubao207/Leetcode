@@ -20,7 +20,7 @@ public class UglyNumber_II {
     public static void main(String[] args){
         test();
     }
-    //1.超时了  555555555555555555
+    //1.超时了  555555555555555555 ????????
     //每个合数都可以写成几个质数（也可称为素数）相乘的形式
     public static int nthUglyNumber(int n) {
         if(n == 1)
@@ -78,15 +78,6 @@ public class UglyNumber_II {
         while(count < n){
             int next = Math.min(Math.min(result.get(index2) * 2,result.get(index3) * 3),result.get(index5) * 5);
             result.add(next);
-//            while(result.get(index2) * 2 <= next){
-//                index2++;
-//            }
-//            while(result.get(index3) * 3 <= next){
-//                index3++;
-//            }
-//            while(result.get(index5) * 5 <= next){
-//                index5++;
-//            }
             if(next == result.get(index2) * 2)//最小的丑数对应的index才要+1
                 index2++;
             if(next == result.get(index3) * 3)

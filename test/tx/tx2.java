@@ -1,27 +1,34 @@
 package tx;
+
 import java.util.*;
+import java.util.stream.StreamSupport;
 
 public class tx2 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int w = sc.nextInt();
-        int[] cap = new int[2*n];
-        for(int i=0;i<2*n;i++)
-            cap[i]=sc.nextInt();
-        Arrays.sort(cap);
-        int girl_minest = cap[0];
-        int boy_minest = cap[n];
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++)
+            arr[i] = sc.nextInt();
+        int[] p = new int[n];
+        int result = getSum(arr, p, n, 0);
+        System.out.print(result);
+    }
 
-        double every_weight = 0;
-        if(boy_minest>=2*girl_minest){
-            every_weight = (double)girl_minest;
-        }else{
-            every_weight = (double)boy_minest / 2;
+    public static int getSum(int[] arr, int[] p, int n, int sum) {
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                if (i == j)
+                    p[j] = arr[i];
+                else if (i + 1 == j)
+                    p[j] = Math.max(arr[i], arr[j]);
+                else
+                    p[j] = Math.max(p[j - 1], arr[j]);
+                sum = sum % 1000000007 + p[j] % 1000000007;
+            }
         }
-        double res = Math.min(every_weight*n + 2*every_weight*n,w);
-        System.out.println(String.format("%.6f", res));
+        return sum;
     }
 
 }

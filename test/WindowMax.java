@@ -1,35 +1,40 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class WindowMax {
     public static void main(String[] args) {
         int[] nums = {2, 3, 4, 2, 6, 2, 5, 1};
-        new WindowMax().movingWindow(nums,3);
+        System.out.println(new WindowMax().movingWindow(nums,3));
     }
-
-    public ArrayList<Integer> movingWindow(int[] num, int size) {
-        ArrayList<Integer> res = new ArrayList<>();
-        if (num.length == 0 || size == 0 || size > num.length)
-            return res;
-        LinkedList<Integer> queue = new LinkedList<>();
-        for(int i=0;i<num.length;i++){
-            if(!queue.isEmpty()){
-                //如果当前队头已经不在窗口中
-                if(i - queue.getFirst() >= size){
-                    queue.removeFirst();
-                }
-                //如果队尾元素比当前值小，要出队
-                while(!queue.isEmpty()&&num[i]>num[queue.getLast()]){
-                    queue.removeLast();
-                }
+    private class MaxQueue {
+        private Deque<Integer> queue = new LinkedList<Integer>();
+        public void push(int t) {
+            while (!queue.isEmpty() && t > queue.getLast()) {
+                queue.removeLast();
             }
-            queue.offer(i);
-            if(i>=size-1){
-                res.add(num[queue.getFirst()]);
+            queue.addLast(t);
+
+        }
+        public void pop(int x) {
+            if (!queue.isEmpty() && queue.getFirst() == x)
+                queue.removeFirst();
+        }
+        public int max() {
+            return queue.getFirst();
+        }
+
+    }
+    public ArrayList<Integer> movingWindow(int[] num, int size) {
+        MaxQueue queue = new MaxQueue();
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i < num.length; i++) {
+            if (i < size - 1) {
+                queue.push(num[i]);
+            } else {
+                queue.push(num[i]);
+                res.add(queue.max());
+                queue.pop(num[i - size + 1]);
             }
         }
-        System.out.println(res);
         return res;
     }
 }
