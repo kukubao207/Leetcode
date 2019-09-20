@@ -1,23 +1,32 @@
 package Exam.WeeklyContest153;
 
+import java.util.Scanner;
+
+/**
+ *
+ */
 public class exam1 {
-    public static void main(String[] args) {
-        int []distance = {1,2,3,4};
-        int s = 0;
-        int e = 2;
-        System.out.println(distanceBetweenBusStops(distance, s, e));
+    public static void main(String[] args){
+        test();
     }
+    public static void test(){
+        int[] distance = new int[]{1, 2, 3, 4};
+        int start = 0;
+        int destination = 3;
+        System.out.print(distanceBetweenBusStops(distance, start, destination));
+    }
+
     public static int distanceBetweenBusStops(int[] distance, int start, int destination) {
-        int a = 0, s = start;
-        while (s != destination) {
-            a += distance[s];
-            s = (s + 1) % distance.length;
+        int n = distance.length;
+        int i = start;
+        int sum = 0;
+        while(i != destination){
+            sum += distance[i];
+            i = (i + 1) % n;
         }
-        int b = 0, e = destination;
-        while (e != start) {
-            b += distance[e];
-            e = (e + 1) % distance.length;
-        }
-        return Math.min(a, b);
+        int m = 0;
+        for(int j = 0; j < n; j++)
+            m += distance[j];
+       return Math.min(sum, m - sum);
     }
 }

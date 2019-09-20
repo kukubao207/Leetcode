@@ -19,17 +19,11 @@ public class quickSort {
             //先看右边，依次往左递减
             while (low < high && arr[high] >= tmp)
                 high--;
-            if (low >= high)
-                break;
-            else
-                arr[low] = arr[high];
+            arr[low] = arr[high];
             //看左边
             while (low < high && arr[low] <= tmp)
                 low++;
-            if (low >= high)
-                break;
-            else
-                arr[high] = arr[low];
+            arr[high] = arr[low];
         }
         arr[low] = tmp;
         return low;
@@ -37,15 +31,17 @@ public class quickSort {
 
     public static void Quick(int arr[], int start, int end) {
         int i = divide(arr, start, end);
-        if (i - 1 > 0)
-            divide(arr, 0, i - 1);
+        if (i - 1 > start)
+            Quick(arr, start, i - 1);
         if (i + 1 < end)
-            divide(arr, i + 1, end);
+            Quick(arr, i + 1, end);
     }
 
-    public static void Quicksort(int array[]) {
-        Quick(array, 0, array.length - 1);
+    public static int[] sortArray(int[] nums) {
+        Quick(nums, 0, nums.length - 1);
+        return nums;
     }
+
 
     //2.非递归 利用栈 基准两侧控制范围的下标入栈
     public static void Quicks(int[] arr){

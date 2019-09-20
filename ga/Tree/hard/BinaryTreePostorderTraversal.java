@@ -79,6 +79,23 @@ public class BinaryTreePostorderTraversal {
         return res;
     }
 
+    public List<Integer> postorderTraversal3(TreeNode root) {
+        List<Integer> result = new ArrayList<Integer>();
+        if(root == null)
+            return result;
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);   //首先将根节点压栈
+        while(!stack.isEmpty()){
+            TreeNode cur = stack.pop(); //首先出栈的为根节点，其后先出右子节点，后出左子节点
+            if(cur.left != null)
+                stack.push(cur.left);
+            if(cur.right != null)
+                stack.push(cur.right);
+            result.add(0, cur.val);//因为出栈顺序为“根右左”，所以需要每次将元素插入list开头
+        }
+        return result;
+    }
+
 
     public class TreeNode {
         int val;

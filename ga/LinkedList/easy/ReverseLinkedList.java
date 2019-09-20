@@ -27,18 +27,13 @@ public class ReverseLinkedList {
         return pre;
     }
     //递归
-    public ListNode reverseList1(ListNode head) {
+    public ListNode reverseList1(ListNode head){
         if(head == null || head.next == null)
             return head;
-        head.next = reverseList1(head.next);
-        ListNode cur = head;
-        while(cur.next != null){
-            cur = cur.next;
-        }
-        cur.next = head;
-        ListNode res = cur.next.next;
-        cur.next.next = null;
-        return res;
+        ListNode newHead = reverseList1(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
     }
     public class ListNode {
         int val;
