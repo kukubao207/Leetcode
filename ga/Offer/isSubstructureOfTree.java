@@ -1,6 +1,7 @@
 package Offer;
-
-public class SubstructureOfTree {
+//判断是不是树的子结构
+//输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+public class isSubstructureOfTree {
     public class TreeNode {
         int val = 0;
         TreeNode left = null;
