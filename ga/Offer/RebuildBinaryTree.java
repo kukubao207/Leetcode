@@ -1,5 +1,6 @@
 package Offer;
 
+//前序和中序重构二叉树
 public class RebuildBinaryTree {
     public class TreeNode {
         int val;

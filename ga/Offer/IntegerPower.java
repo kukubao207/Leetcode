@@ -1,5 +1,6 @@
 package Offer;
 
+//求某个数的N次方
 public class IntegerPower {
     public double Power(double base, int exponent) {
         if (exponent == 0)
