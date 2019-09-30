@@ -26,34 +26,25 @@ public class GenerateParentheses {
         System.out.print(generateParenthesis(n));
     }
 
-    //https://leetcode-cn.com/problems/generate-parentheses/solution/java-shi-ji-xing-dai-ma-ac-ji-yu-hui-su-si-xiang-d/
+    //dfs + 剪枝
     public static List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
-        Set<String> set = helper(n);
-        for(String s: set)
-            res.add(s);
+        dfs(res, "", n, n);
         return res;
     }
 
-    public static Set<String> helper(int n) {
-        Set<String> res = new HashSet<>();
-        if(n == 0)
-            return res;
-        if(n == 1){
-            res.add("()");
-            return res;
+    //left统计“(”的个数，right统计“)”的个数
+    public static void dfs(List<String> res, String tmp, int left, int right) {
+        if(left == 0 && right == 0) {
+            res.add(tmp);
+            return;
         }
-        else {
-            Set<String> set = helper(n - 1);
-            for (String s : set) {
-                String s1 = s + "()";
-                String s2 = "()" + s;
-                String s3 = "(" + s + ")";
-                res.add(s1);
-                res.add(s2);
-                res.add(s3);
-            }
+        if(left > 0) {
+            dfs(res, tmp + "(", left - 1, right);
         }
-        return  res;
+        //只有在当前序列中的左括号数大于右括号数的时候加上右括号才能形成有效序列
+        if(right > left) {
+            dfs(res, tmp + ")", left, right - 1);
+        }
     }
 }
