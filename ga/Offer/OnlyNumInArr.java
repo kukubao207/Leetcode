@@ -7,6 +7,7 @@ public class OnlyNumInArr {
         int n = 0;
         for(int i = 0; i < array.length; i++)
             n ^= array[i];
+        // n &= (-n);
         int x = 1;
         while((n & x) == 0){//这里判断的时候要注意  判断是否等于1不合理！！！！！
             x = x << 1;
