@@ -1,7 +1,5 @@
 package tx;
 
-import java.util.Arrays;
-
 public class HasPath {
     boolean find = false;
 

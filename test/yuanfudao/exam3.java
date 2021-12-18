@@ -11,6 +11,7 @@ public class exam3 {
         String a = sc.nextLine();
         String b = sc.nextLine();
         System.out.println(compute(a, b, N ,M ,K));
+        sc.close();
     }
 
     public static int compute(String a, String b, int N, int M, int K) {

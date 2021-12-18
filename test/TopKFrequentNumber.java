@@ -6,7 +6,9 @@ public class TopKFrequentNumber {
         int k=3;
         TopKFrequentNumber topKFrequentNumber = new TopKFrequentNumber();
         List<Integer> list = topKFrequentNumber.topKFrequent(nums,k);
+        System.out.println(list.toString());
     }
+    @SuppressWarnings("unchecked")
     public List<Integer> topKFrequent(int[] nums, int k) {
         List<Integer> list = new ArrayList<>();
         Map<Integer,Integer> map = new HashMap<>();

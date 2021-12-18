@@ -6,6 +6,7 @@ public class SubSetII {
     public static void main(String[] args){
         int[] a = {1,2,2};
         List<List<Integer>> res=  Solution.subsetsWithDup(a);
+        System.out.println(res.size());
     }
     public static class Solution {
         public static List<List<Integer>> subsetsWithDup(int[] nums) {

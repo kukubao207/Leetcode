@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PermutationII {
@@ -7,7 +6,7 @@ public class PermutationII {
     public static void main(String args[]){
         int nums[] ={1,1,2};
         List<List<Integer>> l = permuteUnique(nums);
-        System.out.println();
+        System.out.println(l.size());
     }
     private static boolean canSwap(int[] nums, int first, int second) {
         for(int i=first;i<second;i++) {

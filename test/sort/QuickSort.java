@@ -5,8 +5,8 @@ public class QuickSort {
         int[] A = {3, 2, 1, 5, 6, 3};
         int k = 2;
         quickSort(A,0,A.length-1);
-        //int ans = findKthLargest(A, k);
-        //int ans2 = partition2(A,0,5);
+        findKthLargest(A, k);
+        // int ans2 = partition2(A,0,5);
     }
 
     public static void quickSort(int[] nums, int start, int end) {

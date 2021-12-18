@@ -3,6 +3,7 @@ public class RegularExpressionMatching {
         String a = "a";
         String b = ".*";
         boolean res = match(a.toCharArray(), b.toCharArray());
+        System.out.println(res);
     }
 
     public static boolean match(char[] str, char[] pattern) {

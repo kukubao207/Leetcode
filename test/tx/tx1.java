@@ -39,5 +39,6 @@ public class tx1 {
                 j--;
         }
         System.out.println(minTime);
+        sc.close();
     }
 }

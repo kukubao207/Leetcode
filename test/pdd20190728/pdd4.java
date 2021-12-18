@@ -29,6 +29,7 @@ public class pdd4 {
                 swap(ret, i, i - 1);
         }
         System.out.println(ret[n - 1]);
+        sc.close();
     }
 
     public static void swap(int[] a, int i, int j) {

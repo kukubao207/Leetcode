@@ -20,6 +20,7 @@ public class Dijkstra {
         }
         dijkstra();
         printDist();
+        sc.close();
     }
 
     public static void dijkstra() {

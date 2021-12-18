@@ -1,8 +1,5 @@
 package sort;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MergeSort {
     private static int count1 =1,count2=1;
     public static void main(String[] args){

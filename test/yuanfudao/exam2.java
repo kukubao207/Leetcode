@@ -20,6 +20,7 @@ public class exam2 {
             }
             System.out.println(compute(q, x));
         }
+        sc.close();
     }
 
     public static int compute(Queue<Integer> q, int x) {

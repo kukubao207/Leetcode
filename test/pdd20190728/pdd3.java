@@ -17,6 +17,7 @@ public class pdd3 {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -66,6 +67,6 @@ public class pdd3 {
                 System.out.print(' ');
             }
         }
-
+        sc.close();
     }
 }

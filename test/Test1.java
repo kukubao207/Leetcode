@@ -50,5 +50,6 @@ public class Test1 {
         for (int  i = 0; i < n; i++)
             A[i] = sc.nextInt();
         System.out.println(binarySearch(A, m));
+        sc.close();
     }
 }

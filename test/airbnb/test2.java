@@ -2,11 +2,9 @@ package airbnb;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class test2 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         System.out.println(divide(2, 4));
         System.out.println(divide(6, 3));
         System.out.println(divide(1, 3));

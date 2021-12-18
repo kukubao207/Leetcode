@@ -1,6 +1,5 @@
 package pdd20190728;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class pdd2 {
@@ -13,6 +12,7 @@ public class pdd2 {
             System.out.println("true");
         else
             System.out.println("false");
+        sc.close();
     }
 
     public static boolean ok = false;

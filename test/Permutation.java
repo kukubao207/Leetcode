@@ -5,7 +5,7 @@ public class Permutation {
     public static void main(String[] args){
         int[] nums = {1,2,3};
         List<List<Integer>> l = Solution.permute(nums);
-        System.out.println();
+        System.out.println(l.size());
     }
 //    public static class Solution {
 //        public static List<List<Integer>> permute(int[] nums) {

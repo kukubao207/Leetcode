@@ -1,7 +1,3 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class StringMatch {
     public static void main(String args[]) {
@@ -9,7 +5,8 @@ public class StringMatch {
         int k = 2;
         String a=".....";
         quickSort(A,0,A.length-1);
-        
+        System.out.println(k);
+        System.out.println(a);
         //int ans = findKthLargest(A, k);
         //int ans2 = partition2(A,0,5);
     }
@@ -77,8 +74,7 @@ public class StringMatch {
     public static void quickSort2(int[] nums, int start, int end){
         int lo=start,hi=end;
         while(lo<hi){
-            int index = partition(nums,lo,hi);
-
+            partition(nums,lo,hi);
         }
     }
 }

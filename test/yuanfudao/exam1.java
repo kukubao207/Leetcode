@@ -22,5 +22,6 @@ public class exam1 {
                 continue;
             System.out.print(a[i] + " ");
         }
+        sc.close();
     }
 }

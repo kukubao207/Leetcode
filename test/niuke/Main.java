@@ -15,6 +15,7 @@ public class Main {
             }
         }
         solve(a, m, n);
+        sc.close();
     }
 
     public static void solve(int[][] a, int m, int n) {

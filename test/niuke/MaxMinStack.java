@@ -56,5 +56,6 @@ public class MaxMinStack {
         }
         maxMinStack.pop();
         System.out.println(maxMinStack.max()+","+maxMinStack.min());
+        sc.close();
     }
 }

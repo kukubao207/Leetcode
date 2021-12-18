@@ -1,7 +1,5 @@
 package yitukeji;
 
-import LinkedList.easy.ReverseLinkedList;
-
 public class test2 {
     public static class ListNode {
         ListNode next;

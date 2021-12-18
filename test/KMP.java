@@ -2,7 +2,7 @@ public class KMP {
     public static void main(String[] args) {
         String ts = "ABCDAABCDCA";
         String ps = "BCDC";
-        KMP(ts,ps);
+        KMPAlgo(ts,ps);
     }
 
     public static int[] getNext(String ps) {
@@ -23,7 +23,7 @@ public class KMP {
         return next;
     }
 
-    public static int KMP(String ts, String ps) {
+    public static int KMPAlgo(String ts, String ps) {
         char[] t = ts.toCharArray();
         char[] p = ps.toCharArray();
         int i = 0; // 主串的位置

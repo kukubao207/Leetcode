@@ -60,6 +60,7 @@ public class pdd1 {
         if (find) {
             for (int i = 0; i < aaa.length; i++)
                 System.out.print(aaa[i] + " ");
+            sc.close();
             return;
         }
         // 要么替换l这个数
@@ -90,7 +91,7 @@ public class pdd1 {
         } else {
             System.out.println("NO");
         }
-
+        sc.close();
     }
 }
 //1 3 7 4 10

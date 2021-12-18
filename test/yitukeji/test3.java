@@ -27,6 +27,7 @@ public class test3 {
                 sum += value * (value - 1) / 2;
         }
         System.out.println(sum);
+        sc.close();
     }
 
     public static class Triangle {

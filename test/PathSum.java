@@ -6,6 +6,7 @@ public class PathSum {
             {4,2,1}
         };
         int n=Solution.minPathSum(grid);
+        System.out.println(n);
     }
 
     public static class Solution {
